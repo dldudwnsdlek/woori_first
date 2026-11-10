@@ -4,7 +4,8 @@
 const W = 13.333;
 const H = 7.5;
 
-const FONT = "Pretendard";
+// 모든 Windows · Mac PowerPoint에 기본 포함된 한글 글꼴
+const FONT = "Malgun Gothic";
 
 // PowerPoint 테마 색상표 (디자인 > 색에서 한 번에 바꿀 수 있는 핵심 팔레트)
 const THEME = {

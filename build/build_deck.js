@@ -61,28 +61,28 @@ async function main() {
   const num = (color) => ({ x: 12.03, y: 6.9, w: 0.5, h: 0.3, fontFace: FONT, fontSize: 10.5, color, align: "right", valign: "middle", margin: 0 });
   const titlePh = (w, h, size, y) => ({
     placeholder: {
-      options: { name: "title", type: "title", x: G.mx, y: y === undefined ? G.titleY : y, w, h, fontFace: FONT, fontSize: size, bold: true, color: C.navy, align: "left", valign: "top", margin: 0 },
+      options: { name: "title", type: "title", x: G.mx, y: y === undefined ? G.titleY : y, w, h, fontFace: FONT, fontSize: size, bold: true, color: C.navy, align: "left", valign: "top", margin: 0, lineSpacing: Math.round(size * 1.2) },
       text: "",
     },
   });
 
   pres.defineSlideMaster({
     title: "COVER", background: { color: "FFFFFF" },
-    objects: [{ rect: { x: G.panelX, y: 0, w: G.panelW, h: H, fill: { color: C.light } } }, titlePh(G.leftW, 1.15, 64, 2.72)],
+    objects: [{ rect: { x: G.panelX, y: 0, w: G.panelW, h: H, fill: { color: C.light } } }, titlePh(7.4, 1.15, 56, 2.78)],
   });
   pres.defineSlideMaster({
     title: "FULL", background: { color: "FFFFFF" },
-    objects: [...footer(), titlePh(G.fullW, 0.7, 36)],
+    objects: [...footer(), titlePh(G.fullW, 0.7, 34)],
     slideNumber: num(C.gray),
   });
   pres.defineSlideMaster({
     title: "PHONE", background: { color: "FFFFFF" },
-    objects: [{ rect: { x: G.panelX, y: 0, w: G.panelW, h: H, fill: { color: C.light } } }, ...footer(), titlePh(G.leftW, 1.3, 36)],
+    objects: [{ rect: { x: G.panelX, y: 0, w: G.panelW, h: H, fill: { color: C.light } } }, ...footer(), titlePh(7.4, 1.3, 34)],
     slideNumber: num(C.gray),
   });
   pres.defineSlideMaster({
     title: "CLOSE", background: { color: "FFFFFF" },
-    objects: [{ rect: { x: G.panelX, y: 0, w: G.panelW, h: H, fill: { color: C.blue } } }, ...footer(), titlePh(G.leftW, 1.3, 36)],
+    objects: [{ rect: { x: G.panelX, y: 0, w: G.panelW, h: H, fill: { color: C.blue } } }, ...footer(), titlePh(7.4, 1.3, 34)],
     slideNumber: num(C.white),
   });
 
@@ -117,7 +117,7 @@ async function main() {
     text("10월 23일 금요일", P.cx, P.top + 0.3, P.cw, 0.18, { size: 7, color: C.grayLight, align: "center", valign: "middle" });
 
     group("s1-user", () => {
-      pill("저 12월 20일에 이사 가요", P.cx + P.cw - 1.78, P.top + 0.58, 1.78, 0.38, { fill: C.blue, color: C.white, size: 10.5, r: 0.14 });
+      pill("저 12월 20일에 이사 가요", P.cx + P.cw - 2.1, P.top + 0.58, 2.1, 0.38, { fill: C.blue, color: C.white, size: 10.5, r: 0.14 });
     });
     group("s1-ai", () => {
       const ax = P.cx, ay = P.top + 1.14;
@@ -164,7 +164,7 @@ async function main() {
         iconCircle(ic, x + 0.35, y0 + 0.35, 0.72, { fill: C.white });
         text(label, x + 0.35, y0 + 1.25, cw - 0.7, 0.5, { size: 26, bold: true, valign: "middle" });
         text(fact, x + 0.35, y0 + 1.8, cw - 0.7, 0.4, { size: 19, bold: true, color: C.blue, valign: "middle" });
-        text(desc, x + 0.35, y0 + 2.24, cw - 0.7, 0.62, { size: 16, color: C.gray, ls: 1.08 });
+        text(desc, x + 0.3, y0 + 2.24, cw - 0.5, 0.62, { size: 15, color: C.gray, ls: 1.08 });
         if (i > 0) {
           // 끊어진 연결 표시
           const gx = x - gap / 2 - 0.2;
@@ -175,12 +175,12 @@ async function main() {
     });
     group("s2-stat", () => {
       text("3.6년", G.mx, 5.48, 1.95, 0.8, { size: 44, bold: true, color: C.blue, valign: "middle" });
-      text("전월세 가구의 평균 거주 기간", G.mx + 2.05, 5.5, 4.0, 0.36, { size: 18, bold: true, valign: "middle" });
-      text("몇 년에 한 번이라, 이사는 매번 처음입니다", G.mx + 2.05, 5.88, 4.0, 0.32, { size: 16, color: C.gray, valign: "middle" });
-      text("출처: 국토교통부 2024년도 주거실태조사", G.mx + 2.05, 6.26, 4.0, 0.22, { size: 11, color: C.grayLight, valign: "middle" });
+      text("전월세 가구의 평균 거주 기간", G.mx + 2.05, 5.5, 4.3, 0.36, { size: 18, bold: true, valign: "middle" });
+      text("몇 년에 한 번이라, 이사는 매번 처음입니다", G.mx + 2.05, 5.88, 4.3, 0.32, { size: 16, color: C.gray, valign: "middle" });
+      text("출처: 국토교통부 2024년도 주거실태조사", G.mx + 2.05, 6.26, 4.3, 0.22, { size: 11, color: C.grayLight, valign: "middle" });
     });
     group("s2-bridge", () => {
-      pill("문제는 정보를 찾는 것에서 끝나지 않습니다", 7.0, 5.52, 5.533, 0.9, { fill: C.navy, color: C.white, size: 20, r: G.r });
+      pill("문제는 정보를 찾는 것에서 끝나지 않습니다", 7.35, 5.52, 5.183, 0.9, { fill: C.navy, color: C.white, size: 19, r: G.r });
     });
     anims[2] = [[A("s2-c1")], [A("s2-c2")], [A("s2-c3")], [A("s2-stat"), A("s2-bridge", "rise", 600)]];
   }
@@ -283,7 +283,7 @@ async function main() {
       group(`s5-c${i + 1}`, () => {
         callout(i + 1, h, sub, 2.72 + i * 1.08, { badge: i === 2 ? C.orange : C.blue });
         if (i === 2) {
-          text("※ 등기 · 체납 · 시세 조회는 전세지킴이 등 기존 진단 기능의 확장과 공공 데이터 연계를 전제로 한\n    구축 제안입니다. 최종 판단은 고객과 전문가 확인을 거칩니다.", G.mx, 6.04, G.leftW, 0.54, { size: 13, color: C.gray, ls: 1.15 });
+          text("※ 등기 · 체납 · 시세 조회는 기존 진단 기능 확장과 공공 데이터 연계를 전제로 한\n    구축 제안입니다. 최종 판단은 고객과 전문가 확인을 거칩니다.", G.mx, 6.04, G.leftW, 0.54, { size: 13, color: C.gray, ls: 1.15 });
         }
       })
     );
@@ -424,7 +424,7 @@ async function main() {
         rect(sx, y, sw, sh, { fill: C.bg, r: G.r });
         iconCircle(ic, sx + 0.18, y + 0.16, 0.48, { fill: C.white });
         text(k, sx + 0.82, y + 0.1, sw - 0.95, 0.26, { size: 13, color: C.gray, valign: "middle" });
-        text(v, sx + 0.82, y + 0.34, sw - 0.95, 0.38, { size: 21, bold: true, valign: "middle" });
+        text(v, sx + 0.8, y + 0.34, sw - 0.85, 0.38, { size: 19, bold: true, valign: "middle" });
       });
     });
     const yEnd = sy + 3 * sh + 2 * sg; // 5.3
@@ -439,8 +439,8 @@ async function main() {
       line(bx, mid, rx - 0.06, mid, { color: C.blue, w: 1.5, arrow: true });
       rect(rx, sy, rw, yEnd - sy, { fill: C.blue, r: G.r, shadow: "sm" });
       text("매도인에게 보낼 잔금", rx + 0.3, sy + 0.34, rw - 0.6, 0.3, { size: 15, bold: true, color: C.blueSoft, valign: "middle" });
-      text("4억 5,000만 원", rx + 0.3, sy + 0.72, rw - 0.5, 0.6, { size: 28, bold: true, color: C.white, valign: "middle" });
-      text("매매가 5억 − 계약금 5,000만", rx + 0.3, sy + 1.36, rw - 0.5, 0.28, { size: 13, color: C.blueSoft, valign: "middle" });
+      text("4억 5,000만 원", rx + 0.3, sy + 0.72, rw - 0.4, 0.6, { size: 25, bold: true, color: C.white, valign: "middle" });
+      text("매매가 5억 - 계약금 5,000만", rx + 0.3, sy + 1.36, rw - 0.5, 0.28, { size: 13, color: C.blueSoft, valign: "middle" });
       rect(rx + 0.3, sy + 1.9, rw - 0.6, 0.46, { fill: C.white, r: 0.23 });
       circle(rx + 0.42, sy + 2.01, 0.24, { fill: C.green });
       icon("LuCheck", "white", rx + 0.47, sy + 2.06, 0.14);
@@ -451,7 +451,7 @@ async function main() {
       rect(sx, by, G.leftW, bh, { fill: C.orangeSoft, r: G.r });
       iconCircle("LuCircleAlert", sx + 0.24, by + 0.27, 0.48, { fill: C.orange, color: "white", scale: 0.56 });
       text("부대비용 620만 원이 모자라요", sx + 0.92, by + 0.14, 4.0, 0.42, { size: 21, bold: true, color: C.orangeDeep, valign: "middle" });
-      text("취득세 등 350만 + 중개보수 200만 + 법무사 70만 (예시)", sx + 0.92, by + 0.58, 4.3, 0.28, { size: 12.5, color: C.ink2, valign: "middle" });
+      text("취득세 등 350만 + 중개보수 200만 + 법무사 70만", sx + 0.92, by + 0.58, 4.1, 0.28, { size: 12, color: C.ink2, valign: "middle" });
     });
     group("s7-fix", () => {
       const fx = sx + G.leftW - 1.92;
@@ -514,10 +514,6 @@ async function main() {
       const y = ty + i * rh;
       const last = i === 3;
       const main = last ? C.orange : C.blue;
-      if (on) {
-        rect(G.mx - 0.05, y - 0.03, nx - G.mx - 0.02, rh - 0.06, { fill: C.white });
-        rect(nx + nd + 0.1, y - 0.03, G.mx + G.leftW - (nx + nd + 0.1) + 0.04, rh - 0.06, { fill: C.white });
-      }
       text(tm, G.mx, y, 1.2, 0.42, { size: 24, bold: true, color: on ? main : C.grayLight, valign: "middle" });
       if (i < 3) line(nx + nd / 2, y + 0.06 + nd, nx + nd / 2, y + rh + 0.06, { color: on ? C.blue : C.line, w: 2 });
       if (on) {
@@ -531,7 +527,6 @@ async function main() {
       if (on) pill(chip, 6.6, y + 0.03, 1.25, 0.38, { fill: last ? C.orange : C.light, color: last ? C.white : C.blue, size: 13 });
       else pill(chip, 6.6, y + 0.03, 1.25, 0.38, { line: C.line, color: C.grayLight, size: 13 });
     };
-    for (let i = 0; i < 4; i++) drawStep(i, false);
     for (let i = 0; i < 4; i++) group(`s8-L${i + 1}`, () => drawStep(i, true));
 
     group("s8-safe", () => {
@@ -554,15 +549,13 @@ async function main() {
     text("12월 18일 금요일 · 잔금일", P.cx + 0.04, y, 2.2, 0.18, { size: 8, bold: true, color: C.blue, valign: "middle" });
     text("조건이 확인되면 다음이 열려요", P.cx + 0.04, y + 0.19, 2.5, 0.24, { size: 11, bold: true, valign: "middle" });
     const segW = (P.cw - 0.08 - 0.09) / 4;
-    for (let i = 0; i < 4; i++) rect(P.cx + 0.04 + i * (segW + 0.03), y + 0.5, segW, 0.05, { fill: C.line, r: 0.025 });
     // 안심금고
     const vy = y + 0.64;
     pcard(P.cx, vy, P.cw, 0.56, { line: C.blueSoft, lw: 1 });
     rect(P.cx + 0.12, vy + 0.12, 0.32, 0.32, { fill: C.blue, r: 0.08 });
     icon("LuLock", "white", P.cx + 0.2, vy + 0.2, 0.16);
     text("잔금 안심금고", P.cx + 0.54, vy + 0.1, 1.1, 0.2, { size: 9.5, bold: true, valign: "middle" });
-    text("송금 전까지 따로 보관해요", P.cx + 0.54, vy + 0.3, 1.25, 0.16, { size: 6.8, color: C.gray, valign: "middle", nocheck: true });
-    text("1,000만", P.cx + P.cw - 1.05, vy + 0.1, 0.93, 0.36, { size: 11, bold: true, align: "right", valign: "middle" });
+    text("송금 전까지 보관", P.cx + 0.54, vy + 0.3, 1.0, 0.16, { size: 6.8, color: C.gray, valign: "middle", nocheck: true });
     // 단계 카드
     const ly = vy + 0.66, lh = 3.58;
     pcard(P.cx, ly, P.cw, lh);
@@ -575,7 +568,6 @@ async function main() {
     const drawRow = (i, on) => {
       const [t, d, tm] = prow[i];
       const ry = ly + 0.1 + i * prh;
-      if (on) rect(P.cx + 0.4, ry - 0.01, P.cw - 0.44, prh - 0.04, { fill: C.white });
       line(px + pnd / 2, ry + 0.04 + pnd, px + pnd / 2, ry + prh + 0.04, { color: on ? C.green : C.line, w: 1.25 });
       if (on) {
         circle(px, ry + 0.04, pnd, { fill: C.green });
@@ -585,15 +577,8 @@ async function main() {
       text(d, P.cx + 0.42, ry + 0.2, 1.9, 0.16, { size: 6.8, color: on ? C.gray : C.grayLight, valign: "middle", nocheck: true });
       text(on ? tm : "대기", P.cx + P.cw - 0.58, ry, 0.46, 0.21, { size: 7.5, bold: true, color: on ? C.greenDeep : C.grayLight, align: "right", valign: "middle" });
     };
-    for (let i = 0; i < 3; i++) drawRow(i, false);
-    // 잔금 보내기 (잠김)
     const sy4 = ly + 0.1 + 3 * prh;
-    circle(px, sy4 + 0.04, pnd, { fill: C.white, line: C.grayLight, lw: 1 });
-    text("잔금 보내기", P.cx + 0.42, sy4, 1.4, 0.21, { size: 9, bold: true, color: C.grayLight, valign: "middle" });
     const ay = sy4 + 0.3, ah = 1.5;
-    rect(P.cx + 0.14, ay, P.cw - 0.28, ah, { line: C.grayLight, lw: 1, dash: "dash", r: 0.1 });
-    icon("LuLock", "grayLight", P.cx + P.cw / 2 - 0.11, ay + 0.46, 0.22);
-    text("앞 단계가 모두 확인되면 열려요", P.cx + 0.14, ay + 0.76, P.cw - 0.28, 0.22, { size: 8, color: C.grayLight, align: "center", valign: "middle" });
     // 하단 안내
     icon("LuShieldCheck", "gray", P.cx + 0.2, ly + lh - 0.235, 0.13);
     text("조건이 하나라도 어긋나면 모든 이체가 멈춰요", P.cx + 0.38, ly + lh - 0.27, P.cw - 0.5, 0.2, { size: 6.8, color: C.gray, valign: "middle", nocheck: true });
@@ -603,14 +588,12 @@ async function main() {
         drawRow(i, true);
         rect(P.cx + 0.04 + i * (segW + 0.03), y + 0.5, segW, 0.05, { fill: C.green, r: 0.025 });
         if (i === 1) {
-          rect(P.cx + P.cw - 1.0, vy + 0.08, 0.92, 0.4, { fill: C.white });
           text("2억 1,000만", P.cx + P.cw - 1.15, vy + 0.1, 1.03, 0.36, { size: 11, bold: true, color: C.blue, align: "right", valign: "middle" });
         }
       });
     }
     group("s8-P4", () => {
       rect(P.cx + 0.04 + 3 * (segW + 0.03), y + 0.5, segW, 0.05, { fill: C.orange, r: 0.025 });
-      rect(P.cx + 0.08, sy4 - 0.01, P.cw - 0.16, ah + 0.36, { fill: C.white });
       circle(px, sy4 + 0.04, pnd, { fill: C.orange });
       text("잔금 보내기", P.cx + 0.42, sy4, 1.4, 0.21, { size: 9, bold: true, valign: "middle" });
       text("승인 대기", P.cx + P.cw - 0.7, sy4, 0.58, 0.21, { size: 7.5, bold: true, color: C.orangeDeep, align: "right", valign: "middle" });
@@ -631,7 +614,7 @@ async function main() {
       badge(2, bxx, ly + 0.5, 0.3, { size: 11 });
       badge(3, bxx, ay + 0.97, 0.3, { size: 11 });
     });
-    ui.phoneCaption("컨셉 화면 · 예시 금액 · 실제 거래 화면이 아닙니다");
+    ui.phoneCaption("컨셉 화면 · 예시 금액 · 실제 거래 아님");
     anims[8] = [
       [A("s8-L1", "fade"), A("s8-P1", "fade")],
       [A("s8-L2", "fade"), A("s8-P2", "fade")],
@@ -720,7 +703,7 @@ async function main() {
     const rows = [
       ["위험점검", "전세지킴이 · 등기변동알리미", "계약서 정보 추출(OCR)"],
       ["자금 설계", "주택담보 · 디딤돌대출 취급", "잔금 지도"],
-      ["잔금 실행", "예약이체 · 오픈뱅킹 잔액 조회", "안심금고 · 조건부 이체"],
+      ["잔금 실행", "예약이체 · 오픈뱅킹 조회", "안심금고 · 조건부 이체"],
       ["입주 후", "자동이체 · 예적금 · 보험", "기존 기능 연결"],
     ];
     text("단계", c0, hy, w0, hh, { size: 13, bold: true, color: C.gray, valign: "middle" });
@@ -748,7 +731,7 @@ async function main() {
         const x = c0 + i * (sw + 0.2);
         rect(x, sy, sw, sh, { fill: C.bg, r: G.r });
         icon(ic, ic === "LuCirclePause" ? "orange" : "blue", x + 0.16, sy + 0.17, 0.3);
-        text(t, x + 0.56, sy, sw - 0.6, sh, { size: 15, bold: true, valign: "middle" });
+        text(t, x + 0.54, sy, sw - 0.58, sh, { size: 14, bold: true, valign: "middle" });
       });
     });
     // 우측 블루 패널 — 마무리
@@ -765,7 +748,8 @@ async function main() {
   pres.slides[9].addImage({ path: LOGO, x: G.panelX + 0.62 + 0.085, y: 0.62 + 0.084, w: 0.45, h: 0.453, altText: "우리WON뱅킹 로고" });
 
   await pres.writeFile({ fileName: path.join(OUT, "deck_raw.pptx") });
-  fs.writeFileSync(path.join(OUT, "anim.json"), JSON.stringify({ anims, theme: THEME }, null, 2));
+  // 애니메이션은 사용하지 않음 (그룹 이름만 편집 편의를 위해 유지)
+  fs.writeFileSync(path.join(OUT, "anim.json"), JSON.stringify({ anims: {}, theme: THEME }, null, 2));
   if (ui.warnings.length) {
     console.log(`\n⚠ 텍스트 맞춤 경고 ${ui.warnings.length}건`);
     ui.warnings.forEach((w) => console.log("  " + w));

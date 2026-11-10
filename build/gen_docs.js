@@ -4,7 +4,7 @@ const path = require("path");
 const { SLIDES } = require("./content/script");
 
 const PACE = 5.0; // 초당 음절 (분당 300음절 — 또박또박 말하는 발표 속도)
-const CLICK = 0.6; // 클릭 1회당 여유(초)
+const CLICK = 0.6; // 화면을 가리키며 잠깐 멈추는 시간(초)
 const TURN = 1.0; // 슬라이드 전환 여유(초)
 
 // ── 읽는 음절 수 추정: 숫자는 한자어 읽기로 바꿔 센다
@@ -65,13 +65,13 @@ let md = `# WON 첫집 메이트 — 10분 발표 대본\n\n`;
 md += `> WOORI × SSAFY 우리WON뱅킹 아이디어 경진대회 본선 · 팀 WEN (유지민 · 김승현 · 이영준)\n>\n`;
 md += `> 이 문서는 \`build/content/script.js\` 에서 자동 생성됩니다. 같은 내용이 PPTX의 발표자 노트에도 들어 있습니다.\n\n`;
 md += `## 읽는 법\n\n`;
-md += `- **▶ 클릭 n** 표시가 나오면 그 문장을 말하기 직전에 한 번 클릭합니다. 화면에 해당 요소가 나타난 뒤 말을 시작하세요.\n`;
+md += `- 슬라이드에 애니메이션은 없습니다. **◆ 가리킬 곳 n** 표시는 그 문장을 말할 때 레이저 포인터나 손으로 짚을 화면 요소입니다.\n`;
 md += `- *(괄호로 묶인 문장)* 은 시간이 부족하면 생략해도 흐름이 끊기지 않는 문장입니다.\n`;
 md += `- **[전환]** 은 다음 슬라이드로 넘기면서 하는 말입니다. 문장을 말한 뒤 넘기세요.\n`;
-md += `- 총 클릭 수는 애니메이션 ${totalClicks}회 + 슬라이드 넘김 9회입니다. 리모컨 ‘다음’ 버튼만 사용합니다.\n\n`;
+md += `- 리모컨은 슬라이드를 넘길 때만 누릅니다(총 9회).\n\n`;
 md += `## 발표 시간 검증\n\n`;
-md += `말하기 속도는 분당 300음절(초당 ${PACE}음절)로 잡았고, 숫자는 실제로 읽는 방식(예: 4억 5,000만 → 사억 오천만)으로 음절을 셌습니다. 클릭 1회당 ${CLICK}초, 슬라이드 전환마다 ${TURN}초의 여유를 더했습니다.\n\n`;
-md += `| 장 | 슬라이드 | 배정 | 음절 | 클릭 | 예상 |\n|---|---|---|---|---|---|\n`;
+md += `말하기 속도는 분당 300음절(초당 ${PACE}음절)로 잡았고, 숫자는 실제로 읽는 방식(예: 4억 5,000만 → 사억 오천만)으로 음절을 셌습니다. 화면을 가리킬 때마다 ${CLICK}초, 슬라이드 전환마다 ${TURN}초의 여유를 더했습니다.\n\n`;
+md += `| 장 | 슬라이드 | 배정 | 음절 | 가리킴 | 예상 |\n|---|---|---|---|---|---|\n`;
 for (const r of rows) md += `| ${r.s.no} | ${r.s.title} | ${mmss(r.s.sec)} | ${r.n} | ${r.clicks} | ${mmss(r.est)} |\n`;
 md += `| **합계** | | **${mmss(totalPlan)}** | **${totalSyl}** | **${totalClicks}** | **${mmss(total)}** |\n\n`;
 const fast = (totalSyl / 5.4) + totalClicks * CLICK + 10 * TURN;
@@ -92,12 +92,12 @@ for (const r of rows) {
   for (const seg of s.segments) {
     if (seg.cue) {
       click += 1;
-      md += `> **▶ 클릭 ${click}** — ${seg.cue}\n\n`;
+      md += `> **◆ 가리킬 곳 ${click}** — ${seg.cue}\n\n`;
     }
     md += seg.text.startsWith("(") ? `*${seg.text}*\n\n` : `${seg.text}\n\n`;
   }
   md += `**[전환]** ${s.transition}\n\n`;
-  md += `**화면 · 애니메이션 타이밍**: ${s.board.animation}\n\n---\n\n`;
+  md += `**시선 유도 순서**: ${s.board.animation}\n\n---\n\n`;
   acc += s.sec;
 }
 fs.writeFileSync(path.join(__dirname, "..", "docs", "발표대본.md"), md);
@@ -115,11 +115,11 @@ for (const s of SLIDES) {
   sb += `| 핵심 메시지 | ${s.board.message} |\n`;
   sb += `| 화면 배치 의도 | ${s.board.layout} |\n`;
   sb += `| 사용한 시각 자료 | ${s.board.visuals} |\n`;
-  sb += `| 애니메이션 구성 | ${s.board.animation} |\n`;
+  sb += `| 시선 유도 순서 | ${s.board.animation} |\n`;
   sb += `| 강조할 문장 | “${s.board.emphasis}” |\n\n`;
 }
 fs.writeFileSync(path.join(__dirname, "..", "docs", "스토리보드.md"), sb);
 
-console.log("장  배정   음절  클릭  예상");
+console.log("장  배정   음절  가리킴  예상");
 for (const r of rows) console.log(String(r.s.no).padStart(2), mmss(r.s.sec).padStart(5), String(r.n).padStart(5), String(r.clicks).padStart(4), mmss(r.est).padStart(6));
-console.log(`합계 ${mmss(totalPlan)}  ${totalSyl}음절  클릭 ${totalClicks}  예상 ${mmss(total)} (빠르게 ${mmss(fast)} / 느리게 ${mmss(slow)} / 생략 시 ${mmss(cut)})`);
+console.log(`합계 ${mmss(totalPlan)}  ${totalSyl}음절  가리킴 ${totalClicks}  예상 ${mmss(total)} (빠르게 ${mmss(fast)} / 느리게 ${mmss(slow)} / 생략 시 ${mmss(cut)})`);

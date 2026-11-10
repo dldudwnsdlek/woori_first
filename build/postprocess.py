@@ -2,8 +2,8 @@
 """pptxgenjs 결과물 후처리.
 
 1) 같은 이름(`name#n`)의 도형을 PowerPoint 그룹으로 묶음 → 편집·애니메이션 단위
-2) 슬라이드별 클릭 애니메이션(<p:timing>) 삽입 — 페이드 / 살짝 올라오며 페이드
-3) 모든 슬라이드에 동일한 페이드 화면 전환 삽입
+2) (선택) anim.json 에 지정한 클릭 애니메이션 삽입 — 현재 덱은 사용하지 않음
+3) 화면 전환 제거, 텍스트 언어(ko-KR)·동아시아 문자셋(한글) 교정
 4) 테마 색·글꼴(한글 포함) 기록
 
 사용: python3 postprocess.py [입력.pptx] [anim.json] [출력.pptx]
@@ -167,6 +167,17 @@ def timing_xml(clicks, gids):
     return etree.fromstring(xml)
 
 
+def fix_lang(root):
+    """pptxgenjs 기본값(en-US, 동아시아 문자셋 -122=중국어 간체)을 한국어로 교정.
+    문자셋이 중국어로 적혀 있으면 PowerPoint가 중국어용 대체 글꼴을 골라 자간이 깨집니다."""
+    for el in root.iter(q("a:rPr"), q("a:endParaRPr"), q("a:defRPr")):
+        if el.get("lang") in (None, "en-US"):
+            el.set("lang", "ko-KR")
+        el.set("altLang", "en-US")
+    for el in root.iter(q("a:ea")):
+        el.set("charset", "-127")  # 129 = HANGUL_CHARSET
+
+
 def set_tail(root, transition, timing):
     """<p:sld> 자식 순서: cSld, clrMapOvr, transition, timing, extLst"""
     for tag in ("p:transition", "p:timing"):
@@ -176,9 +187,11 @@ def set_tail(root, transition, timing):
     if anchor is None:
         anchor = root.find("p:cSld", NS)
     pos = root.index(anchor) + 1
-    root.insert(pos, transition)
+    if transition is not None:
+        root.insert(pos, transition)
+        pos += 1
     if timing is not None:
-        root.insert(pos + 1, timing)
+        root.insert(pos, timing)
 
 
 def patch_theme(xml, theme):
@@ -227,13 +240,21 @@ def main():
             gids = group_shapes(root)
             clicks = anims.get(no, [])
             timing = timing_xml(clicks, gids) if clicks else None
-            transition = etree.fromstring('<p:transition xmlns:p="%s" spd="fast"><p:fade/></p:transition>' % NS["p"])
-            set_tail(root, transition, timing)
+            for tag in ("p:transition", "p:timing"):
+                for old in root.findall(tag, NS):
+                    root.remove(old)
+            if timing is not None:
+                set_tail(root, None, timing)
+            fix_lang(root)
             total_clicks += len(clicks)
             print("슬라이드 %2d: 그룹 %2d개 · 클릭 %d회" % (no, len(gids), len(clicks)))
             data = etree.tostring(root, xml_declaration=True, encoding="UTF-8", standalone=True)
         elif re.match(r"ppt/theme/theme\d+\.xml$", item.filename):
             data = patch_theme(data, cfg["theme"])
+        elif re.match(r"ppt/(slideLayouts/slideLayout|slideMasters/slideMaster|notesSlides/notesSlide|notesMasters/notesMaster)\d+\.xml$", item.filename):
+            root = etree.fromstring(data)
+            fix_lang(root)
+            data = etree.tostring(root, xml_declaration=True, encoding="UTF-8", standalone=True)
         zout.writestr(item, data)
     zout.close()
     print("총 클릭 %d회 → %s" % (total_clicks, os.path.normpath(DST)))

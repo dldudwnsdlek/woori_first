@@ -28,18 +28,26 @@ function oname() {
 // ── 글자 폭 추정 (Pretendard 기준, em 단위) — 넘침 경고용
 function emWidth(str, bold) {
   let w = 0;
+  // 한글과 영문·숫자 사이 자동 간격(최악 조건)을 1/4em 로 가산
+  const isH = (c) => /[가-힣]/.test(c);
+  const isL = (c) => /[A-Za-z0-9]/.test(c);
+  const arr = [...str];
+  for (let i = 1; i < arr.length; i++) {
+    if ((isH(arr[i - 1]) && isL(arr[i])) || (isL(arr[i - 1]) && isH(arr[i]))) w += 0.25;
+  }
   for (const ch of str) {
     const c = ch.codePointAt(0);
-    if (c >= 0xac00 && c <= 0xd7a3) w += 0.864;
-    else if (c >= 0x3130 && c <= 0x318f) w += 0.864;
-    else if (ch === " ") w += bold ? 0.23 : 0.25;
-    else if (/[0-9]/.test(ch)) w += bold ? 0.64 : 0.6;
-    else if (/[A-Z]/.test(ch)) w += bold ? 0.72 : 0.68;
-    else if (/[a-z]/.test(ch)) w += bold ? 0.58 : 0.55;
-    else if (/[.,·:;'‘’!|]/.test(ch)) w += 0.29;
-    else if (/[“”"()\-−~/]/.test(ch)) w += 0.42;
-    else if (/[①-⑳○●✓→←›‹×+=※㎡]/.test(ch)) w += 0.9;
-    else w += 0.864;
+    // 맑은 고딕 / 나눔고딕 중 넓은 쪽 기준(보수적)
+    if (c >= 0xac00 && c <= 0xd7a3) w += 0.94;
+    else if (c >= 0x3130 && c <= 0x318f) w += 0.94;
+    else if (ch === " ") w += 0.29;
+    else if (/[0-9]/.test(ch)) w += 0.62;
+    else if (/[A-Z]/.test(ch)) w += 0.76;
+    else if (/[a-z]/.test(ch)) w += 0.58;
+    else if (/[.,·:;'‘’!|]/.test(ch)) w += 0.31;
+    else if (/[“”"()\-−~/]/.test(ch)) w += 0.45;
+    else if (/[①-⑳○●✓→←›‹×+=※㎡]/.test(ch)) w += 0.95;
+    else w += 0.94;
   }
   return w;
 }
@@ -120,7 +128,7 @@ function text(str, x, y, w, h, o = {}) {
     color: o.color || C.navy,
     align: o.align || "left",
     valign: o.valign || "top",
-    lineSpacingMultiple: o.ls || 1.0,
+    lineSpacing: Math.round(size * 1.2 * (o.ls || 1.0) * 10) / 10,
     charSpacing: o.cs || 0,
     wrap: true,
     fit: "none",
