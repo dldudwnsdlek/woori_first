@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:400;src:url(https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/woff2/Pretendard-Regular.woff2)}
+@font-face{font-family:P;font-weight:500;src:url(https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/woff2/Pretendard-Medium.woff2)}
+@font-face{font-family:P;font-weight:600;src:url(https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/woff2/Pretendard-SemiBold.woff2)}
+@font-face{font-family:P;font-weight:700;src:url(https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/woff2/Pretendard-Bold.woff2)}
+@font-face{font-family:P;font-weight:800;src:url(https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/woff2/Pretendard-ExtraBold.woff2)}
+:root{
+  --ink:#0b0d12; --t2:#66696e; --t3:#9a9da2; --pend:#97999d; --pend2:#b9bbbe;
+  --blue:#0263bd; --blue2:#0b63ae; --green:#1b9d66; --red:#df474d; --orange:#e8700a;
+  --bg:#f2f3f7; --line:#e3e4e6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:480px;height:970px;background:transparent;overflow:hidden}
+body{font-family:P,sans-serif;color:var(--ink);letter-spacing:-.02em;-webkit-font-smoothing:antialiased;word-break:keep-all}
+.phone{position:absolute;left:13px;top:11px;width:456px;height:952px;border-radius:70px;background:#1b1f27;
+  box-shadow:inset 0 0 0 1px #161b22,inset 0 0 0 3px #3a4047}
+.screen{position:absolute;left:16px;top:16px;width:424px;height:920px;border-radius:54px;overflow:hidden;background:var(--bg);box-shadow:0 0 0 1px #151920}
+/* status + nav (fixed) */
+.sb{position:absolute;left:0;top:0;width:424px;height:49px;z-index:20}
+.sb .tm{position:absolute;left:44px;top:21px;font-size:18px;font-weight:600;letter-spacing:-.01em;line-height:18px;font-variant-numeric:tabular-nums}
+.sb .island{position:absolute;left:149px;top:12px;width:128px;height:36px;border-radius:18px;background:#000}
+.sb svg{position:absolute;top:22px}
+.nav{position:absolute;left:0;top:49px;width:424px;height:57px;background:#fff;border-bottom:1px solid #f0f0f0;z-index:19}
+.topbg{position:absolute;left:0;top:0;width:424px;height:49px;background:#fff;z-index:18}
+.nav .t{position:absolute;left:0;right:0;top:21px;text-align:center;font-size:18.5px;font-weight:700;line-height:20px;letter-spacing:-.025em}
+.nav .help{position:absolute;right:20px;top:24px;font-size:15px;color:#6a6a6d;line-height:15px;letter-spacing:-.025em}
+.nav svg{position:absolute;left:20px;top:20px}
+/* scrolling content */
+.content{position:absolute;left:0;top:106px;width:424px}
+.head{background:#fff;padding:15px 22px 0;height:132px;box-shadow:0 2px 3px rgba(20,30,50,.03)}
+.head .date{font-size:14.5px;font-weight:700;color:#1f61a3;line-height:15px;letter-spacing:-.025em}
+.head .date.red{color:#c5343a}
+.head .ttl{margin-top:7px;font-size:24px;font-weight:800;line-height:27px;height:27px;letter-spacing:-.035em;display:flex;align-items:center;gap:8px}
+.head .ttl .pz{width:28px;height:28px;margin:0 0 0 -1px;border-radius:50%;background:#ee7008;display:grid;place-items:center;flex:none;position:relative;top:1px}
+.head .prog{margin:19px -1px 0;display:flex;gap:5.5px}
+.head .prog i{flex:1;height:7px;border-radius:4px;background:#e5e7eb}
+.head .prog i.g{background:#199c5d}
+.head .prog i.r{background:#e1474d}
+.head .cap{margin-top:9px;display:flex;justify-content:space-between;font-size:13.3px;line-height:14px;color:#6b6b6b;letter-spacing:-.01em}
+.head .cap b{font-weight:700;color:#2b8e6a}
+.head .cap b.red{color:#c5343a}
+.body{padding:15px 15px 20px}
+.card{background:#fff;border-radius:18px;box-shadow:0 1px 2.5px rgba(20,30,50,.06)}
+.vault{height:73px;position:relative}
+.vault .ic{position:absolute;left:17px;top:14px;width:46px;height:46px;border-radius:12px;background:var(--blue);display:grid;place-items:center}
+.vault .t{position:absolute;left:76px;top:18px;font-size:17px;font-weight:700;line-height:18px;letter-spacing:-.035em}
+.vault .s{position:absolute;left:76px;top:40px;font-size:13px;color:#5f6266;line-height:13px;letter-spacing:-.005em}
+.vault .a{position:absolute;right:17px;top:27px;font-size:20px;font-weight:800;line-height:21px;letter-spacing:-.02em}
+.list{margin-top:15px;position:relative;z-index:0;padding:18px 17px 18px}
+.list.end>.row:last-of-type{height:44px}
+.list.endpost{padding-bottom:0}
+.row.hl::before{content:"";position:absolute;left:-17px;right:-17px;top:-9px;height:57px;background:#eaf6ef;z-index:-1}
+.list .vl{position:absolute;left:46px;width:2px;background:var(--line);top:31px;bottom:0}
+.row{position:relative;height:63.6px;padding-left:40px}
+.row .c{position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:#fff;border:2px solid #d7d9db}
+.row.ok .c,.row.bad .c,.row.act .c{border:0}
+.row.ok .c{background:var(--green)}
+.row.ok .c::after{content:"";position:absolute;left:7.6px;top:6.4px;width:11px;height:6px;border-left:2.6px solid #fff;border-bottom:2.6px solid #fff;transform:rotate(-45deg);transform-origin:center;box-sizing:border-box}
+.row.bad .c{background:#e2414a}
+.row.bad .c::after{content:"!";position:absolute;inset:0;color:#fff;font-weight:800;font-size:17px;line-height:26px;text-align:center}
+.row.act .c{background:var(--blue2);box-shadow:0 0 0 5px #d9e7f5}
+.row .l{position:absolute;left:40px;top:0;font-size:16.5px;font-weight:700;line-height:18px;letter-spacing:-.035em;white-space:nowrap}
+.row .s{position:absolute;left:40px;top:24px;font-size:13px;line-height:13px;color:#6a6b6f;letter-spacing:-.005em;white-space:nowrap}
+.row.pend .l{color:var(--pend)}
+.row.pend .s{color:var(--pend2)}
+.row .s.red{color:#c5343a}
+.row .tm{position:absolute;right:1px;top:0;font-size:14px;font-weight:800;color:#1f8f5d;line-height:14px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.row .tag{position:absolute;right:0;top:19px;height:19px;padding:0 9px;border-radius:6px;font-size:12px;font-weight:700;line-height:19px;letter-spacing:-.02em;white-space:nowrap}
+.tag.auto{background:#e8eef9;color:#245f99}
+.tag.bank{background:#e2f6ec;color:#2b7c56}
+.tag.human{background:#ece8fc;color:#5b4a9e}
+.tag.need{background:#fde8e8;color:#c5343a}
+.tag.wait{background:#f0f4f7;color:#63676b}
+.tag.fin{background:#d6efe1;color:#2b7c56}
+.row .rt{position:absolute;right:1px;top:1px;font-size:14px;font-weight:700;line-height:15px;color:#97999d;letter-spacing:-.02em}
+.row .rt.blue{color:#0f66b5;font-weight:800}
+.row .tm.gray{color:#8d9196;font-weight:700}
+/* send card */
+.send{position:relative;margin:-15px 0 0 40px;border:1px solid #e6e9ed;border-radius:16px;background:#f9fafc;padding:16px 15px 14px}
+.send .top{font-size:13.4px;font-weight:600;color:#7a7d82;line-height:14px;display:flex;align-items:center;gap:6px;letter-spacing:-.005em}
+.send.open{border:1.5px solid #6fa3d6;background:#f3f8fd}
+.send.open .top{color:#23935f;font-weight:700}
+.send .who{margin-top:15px;display:flex;justify-content:space-between;font-size:13.5px;line-height:14px;color:#7a7d82;letter-spacing:-.005em}
+.send .who b{font-weight:500;color:#20242a}
+.send .amt{margin-top:9px;font-size:26.5px;font-weight:800;line-height:28px;letter-spacing:-.035em}
+.send .btn{margin-top:11px;height:50px;border-radius:12px;background:#e8ebee;color:#8d9196;font-size:15.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:7px;letter-spacing:-.03em}
+.send.open .btn{background:#0f5fad;color:#fff}
+.send.glow .btn{box-shadow:0 0 0 5px #cfe0f2}
+.send .pause{margin-top:9px;text-align:center;font-size:13px;letter-spacing:-.005em;color:#6a6d72;text-decoration:underline;text-underline-offset:3px;line-height:14px}
+.send.sent{opacity:.6}
+.send.sent .top{color:#23935f}
+.send.sent .btn{background:#5f97d1;color:#fff}
+/* post rows */
+.post{margin:18px -17px 0;padding:0 17px}
+.foot{display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;color:#6a6d72;margin-top:-1px;letter-spacing:-.01em}
+/* notification banner */
+.notif{position:absolute;left:13px;right:13px;top:43px;height:66px;background:#fff;border-radius:18px;box-shadow:0 6px 18px rgba(10,20,40,.14);z-index:30}
+.notif .ic{position:absolute;left:15px;top:13px;width:42px;height:42px;border-radius:10px;background:#6d53d9;display:grid;place-items:center}
+.notif .n{position:absolute;left:67px;top:16px;font-size:15px;font-weight:700;line-height:15px;letter-spacing:-.02em}
+.notif .m{position:absolute;left:67px;top:35px;font-size:13.5px;color:#3d4046;line-height:14px;letter-spacing:-.005em}
+.notif .w{position:absolute;right:15px;top:12px;font-size:11.5px;color:#9a9da2}
+/* alert card (stop) */
+.alert{background:#fff4f1;border:1.5px solid #eed8d8;border-radius:18px;padding:15px 17px 15px}
+.alert h4{font-size:16.5px;font-weight:800;color:#c5343a;line-height:19px;letter-spacing:-.03em}
+.alert p{margin-top:7px;font-size:14.6px;line-height:23px;color:#33363c;letter-spacing:-.01em}
+.alert .b1{margin-top:11px;height:48px;border-radius:12px;background:#0a62af;color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-.03em}
+.alert .b2row{margin-top:8px;display:flex;gap:8px}
+.alert .b2{flex:1;height:48px;border-radius:12px;background:#fff;border:1px solid #e8e3e3;color:#20242a;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;letter-spacing:-.03em;white-space:nowrap}
+/* overlays */
+.dim{position:absolute;inset:0;background:rgba(15,25,40,.47);z-index:40}
+.dim.au{background:rgba(15,25,45,.53)}
+.dim.rw{background:rgba(10,35,70,.665)}
+.auth{position:absolute;left:89px;top:362px;width:247px;height:197px;background:#fff;border-radius:26px;z-index:41;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:35px;gap:25px;box-shadow:0 10px 30px rgba(10,20,40,.18)}
+.auth p{font-size:17.5px;font-weight:700;letter-spacing:-.03em;line-height:20px}
+.rwbox{position:absolute;left:0;right:0;top:378px;z-index:41;display:flex;flex-direction:column;align-items:center;color:#fff}
+.rwbox .big{margin-top:14px;font-size:50px;font-weight:800;line-height:50px;letter-spacing:-.02em}
+.rwbox .sm{margin-top:12px;font-size:16.5px;font-weight:600;letter-spacing:-.03em}
+.sheet{position:absolute;left:0;right:0;bottom:0;height:358px;background:#fff;border-radius:26px 26px 0 0;z-index:41;padding:0 22px}
+.sheet .grab{width:40px;height:5px;border-radius:3px;background:#d9dbde;margin:10px auto 0}
+.sheet h4{margin-top:15px;font-size:19px;font-weight:800;letter-spacing:-.03em;line-height:18px}
+.sheet .to{margin-top:12px;font-size:14.4px;color:#7a7d82;line-height:15px;letter-spacing:-.01em}
+.sheet .to b{margin-left:9px;color:#20242a;font-weight:700}
+.sheet .msg{margin-top:14px;height:167px;border-radius:18px;background:#f2f4f7;padding:19px 17px 0;font-size:15.8px;line-height:25px;color:#20242a;letter-spacing:-.005em;word-break:keep-all}
+.sheet .msg i{display:inline-block;width:2px;height:17px;background:#1f61a3;vertical-align:-3px;margin-left:1px}
+.sheet .bt{margin-top:11px;display:flex;gap:7px}
+.sheet .bt div{height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;letter-spacing:-.03em}
+.sheet .bt .x{width:126px;background:#eef0f4;color:#20242a}
+.sheet .bt .y{flex:1;background:#0f5fad;color:#fff}
+/* sent screen */
+.done{position:absolute;left:0;right:0;top:106px;bottom:0;background:#fff}
+.done .ring{position:absolute;left:150px;top:99px;width:126px;height:126px;border-radius:50%;background:#e6f5ec;display:grid;place-items:center}
+.done .ring i{width:98px;height:98px;border-radius:50%;background:#209c5e;display:grid;place-items:center}
+.done h3{position:absolute;left:0;right:0;top:250px;text-align:center;font-size:26.5px;font-weight:800;letter-spacing:-.035em;line-height:30px}
+.done .p1{position:absolute;left:0;right:0;top:293px;text-align:center;font-size:16px;color:#3d4046;line-height:17px;letter-spacing:-.01em}
+.done .p2{position:absolute;left:0;right:0;top:317px;text-align:center;font-size:14.5px;color:#7a7d82;line-height:15px;letter-spacing:-.01em}
+.done .nx{position:absolute;left:26px;right:26px;top:370px;background:#f3f5f9;border-radius:16px;padding:16px 18px 16px}
+.done .nx small{display:block;font-size:13px;color:#6a6d72;line-height:14px;letter-spacing:-.01em}
+.done .nx p{margin-top:9px;font-size:14.5px;line-height:22px;color:#20242a;letter-spacing:-.02em}
+.done .ok{position:absolute;left:22px;right:22px;bottom:36px;height:56px;border-radius:14px;background:#0f5fad;color:#fff;font-size:16px;font-weight:700;display:grid;place-items:center}
+</style></head><body>
+<div class="phone"><div class="screen" id="scr"></div></div>
+<script>
+const ICON={
+ lock:(c,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="10.5" width="13" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>`,
+ check:(c,s,w=2.6)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+ auth:(c,s,w=2)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M9.6 12.2l1.7 1.7 3.2-3.4"/><path d="M10.5 18.5h3"/></svg>`,
+ shieldchk:(c,s,w=2)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>`,
+ msg:(c,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>`,
+ phone:(c,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/></svg>`,
+ home:(c,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-5h4v5"/></svg>`,
+ doc:(c,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l3 3v15H6z"/><path d="M9 13l2 2 4-4"/></svg>`,
+ pause:(c,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${c}"><rect x="7" y="5.5" width="3.4" height="13" rx="1.4"/><rect x="13.6" y="5.5" width="3.4" height="13" rx="1.4"/></svg>`,
+ rewind:(c,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 48 48" fill="none" stroke="${c}" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 22A14 14 0 1 1 14.5 34.5"/><path d="M9 11v11h11"/></svg>`,
+ shieldsm:(c,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>`,
+};
+const STATUS=`<svg style="left:313px" width="20" height="14" viewBox="0 0 20 14"><rect x="0" y="9" width="3.6" height="5" rx="1" fill="#000"/><rect x="5.4" y="6" width="3.6" height="8" rx="1" fill="#000"/><rect x="10.8" y="3" width="3.6" height="11" rx="1" fill="#000"/><rect x="16.2" y="0" width="3.6" height="14" rx="1" fill="#000"/></svg>
+<svg style="left:339px;top:21px" width="20" height="15" viewBox="0 0 20 15"><path d="M10 14.2l2.6-3.1a4 4 0 0 0-5.2 0z" fill="#000"/><path d="M3.2 6.9a10.3 10.3 0 0 1 13.6 0" stroke="#000" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M5.9 10a6.1 6.1 0 0 1 8.2 0" stroke="#000" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M0.9 3.9a14 14 0 0 1 18.2 0" stroke="#000" stroke-width="0" fill="none"/></svg>
+<svg style="left:364px;top:22px" width="29" height="14" viewBox="0 0 29 14"><rect x="0.8" y="0.8" width="24.4" height="12.4" rx="3.8" stroke="#000" stroke-opacity=".38" stroke-width="1.6" fill="none"/><rect x="2.8" y="2.8" width="20.4" height="8.4" rx="2.2" fill="#000"/><path d="M26.8 4.6v4.8c1-.3 1.6-1.3 1.6-2.4s-.6-2.1-1.6-2.4z" fill="#000" fill-opacity=".4"/></svg>`;
+
+function row(r){
+  const cls=['row',r.st||'pend',r.hl?'hl':''].join(' ');
+  let right='';
+  if(r.tm) right+=`<span class="tm ${r.tmc||''}">${r.tm}</span>`;
+  if(r.tag) right+=`<span class="tag ${r.tag[1]}" style="${r.tm?'':'top:0'}">${r.tag[0]}</span>`;
+  if(r.rt) right+=`<span class="rt ${r.rtc||''}">${r.rt}</span>`;
+  return `<div class="${cls}"><span class="c"></span><span class="l">${r.l}</span>${r.s?`<span class="s ${r.sc||''}">${r.s}</span>`:''}${right}</div>`;
+}
+function render(S){
+  const scr=document.getElementById('scr');
+  let h='';
+  h+=`<div class="topbg"></div><div class="sb"><span class="tm">${S.time}</span><span class="island"></span>${STATUS}</div>`;
+  h+=`<div class="nav"><svg width="14" height="22" viewBox="0 0 14 22" fill="none" stroke="#000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2L2.5 11 11 20"/></svg><div class="t">잔금일 돈 길</div><div class="help">도움말</div></div>`;
+  if(S.done){
+    h+=`<div class="done"><div class="ring"><i>${ICON.check('#fff',46,3)}</i></div><h3>${S.done.h}</h3><p class="p1">${S.done.p1}</p><p class="p2">${S.done.p2}</p><div class="nx"><small>다음 순서</small><p>${S.done.next}</p></div><div class="ok">확인</div></div>`;
+  }else{
+    h+=`<div class="content" style="top:${106-(S.scroll||0)}px">`;
+    const H=S.head;
+    h+=`<div class="head"><p class="date ${H.red?'red':''}">12월 18일 금요일 · 잔금일</p><p class="ttl">${H.icon?`<span class="pz">${ICON.pause('#fff',18)}</span>`:''}${H.t}</p><div class="prog">${H.prog.map(x=>`<i class="${x}"></i>`).join('')}</div><div class="cap"><span>${H.cap}</span><b class="${H.red?'red':''}">${H.st}</b></div></div>`;
+    h+=`<div class="body">`;
+    if(S.vault) h+=`<div class="card vault"><span class="ic">${ICON.lock('#fff',22)}</span><p class="t">잔금 안심금고</p><p class="s">${S.vault.s||'보내기 전까지 여기 그대로 있어요'}</p><p class="a">${S.vault.a}</p></div>`;
+    if(S.alert==='old') h+=`<div class="alert"><h4>무엇이 어긋났나요?</h4><p>지금 집주인의 보증금 2억 원이 09:40까지 들어오지 않았어요.<br>대출 실행과 잔금 송금은 모두 대기 중이에요.</p><div class="b1">${ICON.msg('#fff',18)}<span>중개사님께 보낼 문자 만들기</span></div><div class="b2row"><div class="b2">${ICON.phone('#20242a',16)}<span>법무사·은행 상담 연결</span></div></div></div>`;
+    if(S.alert==='new') h+=`<div class="alert"><h4>무엇이 어긋났나요?</h4><p>지금 집주인의 보증금 2억 원이 09:40까지 들어오지 않았어요.<br>서류 확인·대출 실행과 잔금 송금은 모두 대기 중이에요.</p><div class="b1">${ICON.msg('#fff',18)}<span>중개사님께 보낼 문자 만들기</span></div><div class="b2row"><div class="b2">${ICON.home('#20242a',16)}<span>집주인 반환 확인</span></div><div class="b2">${ICON.phone('#20242a',16)}<span>법무사·은행 상담</span></div></div></div>`;
+    const endc = (!S.send&&!S.post)?'end':(S.post?'endpost':'');
+    h+=`<div class="card list ${endc}" style="${S.alert?'margin-top:15px':''}"><span class="vl" style="${endc==='end'?'bottom:49px':(endc==='endpost'?'bottom:50px':'')}"></span>`;
+    h+=S.rows.map(row).join('');
+    if(S.send){
+      const sd=S.send;
+      const btnIcon = sd.state==='locked'? ICON.lock('#8d9196',16) : ICON.auth('#fff',19,2);
+      h+=`<div class="send ${sd.state==='locked'?'':(sd.state==='sent'?'open sent':'open')} ${sd.glow?'glow':''}">`+
+        `<p class="top">${sd.state==='locked'?ICON.lock('#7a7d82',13)+'다섯 가지가 확인되면 열려요':ICON.check('#23935f',13,3)+'앞 단계 5개 모두 확인됨'}</p>`+
+        `<p class="who"><span>받는 분</span><b>박OO (매도인) · 우리 ···7310</b></p><p class="amt">2억 1,000만 원</p>`+
+        `<div class="btn">${btnIcon}<span>${sd.btn||'본인 인증하고 보내기'}</span></div><p class="pause">잠시 멈추기</p></div>`;
+    }
+    if(S.post){ h+=`<div class="post">`+S.post.map(row).join('')+`</div>`; }
+    h+=`</div>`;
+    if(S.foot) h+=`<p class="foot">${ICON.shieldsm('#6a6d72',14)}${S.foot}</p>`;
+    h+=`</div></div>`;
+  }
+  if(S.notif) h+=`<div class="notif"><span class="ic">${ICON.doc('#fff',22)}</span><p class="n">${S.notif.n}</p><p class="m">${S.notif.m}</p><span class="w">지금</span></div>`;
+  if(S.overlay==='auth') h+=`<div class="dim au"></div><div class="auth">${ICON.shieldchk('#1d69be',86,1.6)}<p>${S.authText||'본인 인증 중'}</p></div>`;
+  if(S.overlay==='rewind') h+=`<div class="dim rw"></div><div class="rwbox">${ICON.rewind('#fff',50)}<p class="big">09:40</p><p class="sm">같은 날, 다른 상황</p></div>`;
+  if(S.overlay==='sheet') h+=`<div class="dim"></div><div class="sheet"><div class="grab"></div><h4>중개사님께 보낼 문자</h4><p class="to">받는 사람<b>이OO 공인중개사</b></p><div class="msg">안녕하세요, 12월 18일 잔금 예정인 OO아파트 매수인입니다. 지금 사는 집의 보증금 반환이 늦어지고 있어요. 매도인께 잔금 시간을 오전 11시 30분으로 미룰 수 있을지 여쭤봐 주실 수 있을까요?${S.cursor?'<i></i>':''}</div><div class="bt"><div class="x">고칠게요</div><div class="y">문자 앱으로 보내기</div></div></div>`;
+  scr.innerHTML=h;
+}
+window.render=render;
+</script>
+</body></html>
