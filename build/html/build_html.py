@@ -120,7 +120,7 @@ def build_doc(src):
     fp = FrameParser()
     fp.feed(src)
     main = [f for f in fp.frames if not f["appx"]]
-    speakers = dict(re.findall(r"([ABC]):'([^']+)'", re.search(r"const SPEAKERS=\{([^}]*)\}", src).group(1)))
+    speakers = dict(re.findall(r"([A-Z]):'([^']+)'", re.search(r"const SPEAKERS=\{([^}]*)\}", src).group(1)))
     lines = ["# WON 첫집 메이트 — 본선 HTML 발표 대본·진행표", "",
              "> `deck/WON첫집메이트_본선발표.html`의 발표자 노트에서 자동 생성했습니다. 대본을 고칠 때는 `build/html/deck_src.html`의 노트를 고치고 다시 빌드하세요.",
              "> ▶n은 그 지점에서 키를 눌러 n단계를 띄운다는 뜻입니다. 낭독 시간은 분당 280음절(여유 있는 속도) 기준 추정입니다.", "",
@@ -134,17 +134,17 @@ def build_doc(src):
         tot_syl += syl
         est = round(syl * 60 / 280)
         rows.append((k, f, syl))
-        lines.append(f"| {k} | {f['name']} | {f['who']} {speakers.get(f['who'], '')} | {mmss(f['time'])} | {mmss(acc)} | {syl} | {mmss(est)} |")
+        lines.append(f"| {k} | {f['name']} | {speakers.get(f['who'], f['who'])} | {mmss(f['time'])} | {mmss(acc)} | {syl} | {mmss(est)} |")
     lines += ["", f"- 권장 시간 합계 **{mmss(acc)}**, 대본 {tot_syl}음절 → 분당 280음절이면 약 **{mmss(round(tot_syl * 60 / 280))}**, 분당 300음절이면 약 {mmss(round(tot_syl / 5))}.",
-              "- 장 전환·시연 조작 여유를 더해 10분 안에 끝나도록 잡았습니다(전환 1~2초 × 13장, 시연 키 조작 포함 약 30초).", ""]
+              "- 장 전환·시연 조작 여유를 더해 10분 안에 끝나도록 잡았습니다(전환 1~2초 × 12장, 시연 장면 조작 포함 약 30~40초).", ""]
     by = {}
     for k, f, syl in rows:
         by.setdefault(f["who"], 0)
         by[f["who"]] += f["time"]
-    lines.append("- 발표 분담: " + " · ".join(f"{w} {speakers.get(w, '')} {mmss(t)}" for w, t in sorted(by.items())))
+    lines.append("- 발표 분담: " + " · ".join(f"{speakers.get(w, w)} {mmss(t)}" for w, t in sorted(by.items())))
     lines += ["", "## 슬라이드별 대본", ""]
     for k, f, syl in rows:
-        lines.append(f"### {k}. {f['name']} — {f['who']} {speakers.get(f['who'], '')} · 권장 {mmss(f['time'])} · {syl}음절")
+        lines.append(f"### {k}. {f['name']} — {speakers.get(f['who'], f['who'])} · 권장 {mmss(f['time'])} · {syl}음절")
         lines.append("")
         for p in f["paras"]:
             t = p["text"]
