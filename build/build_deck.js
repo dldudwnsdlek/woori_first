@@ -675,11 +675,16 @@ async function main() {
     });
     line(P.cx + 0.16, y + 1.88, P.cx + P.cw - 0.16, y + 1.88, { color: C.line, w: 0.75 });
     text("다음 할 일", P.cx + 0.16, y + 1.95, 1.2, 0.2, { size: 7.5, bold: true, color: C.gray, valign: "middle" });
-    [["전입신고", "오늘", C.orange], ["취득세 신고 · 2027.2.16까지", "D-59", C.gray]].forEach(([k, v, col], i) => {
+    // 취득세는 잔금일(12.18) 등기 신청 전에 납부를 확인한 완료 항목 (지방세법 제20조 제4항)
+    // 완료 표시는 위 자동이체 행과 같은 초록 원 + 흰 체크
+    [["전입신고", "오늘", false], ["취득세 납부 완료", "12.18 확인", true]].forEach(([k, v, done], i) => {
       const ry = y + 2.2 + i * 0.28;
-      circle(P.cx + 0.16, ry + 0.035, 0.16, { line: C.grayLight, lw: 1, fill: C.white });
-      text(k, P.cx + 0.42, ry, 1.6, 0.23, { size: 8.5, valign: "middle" });
-      text(v, P.cx + P.cw - 0.66, ry, 0.5, 0.23, { size: 8, bold: true, color: col, align: "right", valign: "middle" });
+      if (done) {
+        circle(P.cx + 0.16, ry + 0.035, 0.16, { fill: C.green });
+        icon("LuCheck", "white", P.cx + 0.195, ry + 0.07, 0.09);
+      } else circle(P.cx + 0.16, ry + 0.035, 0.16, { line: C.grayLight, lw: 1, fill: C.white });
+      text(k, P.cx + 0.42, ry, 1.6, 0.23, { size: 8.5, color: done ? C.gray : C.navy, valign: "middle" });
+      text(v, P.cx + P.cw - 0.9, ry, 0.74, 0.23, { size: 8, bold: true, color: done ? C.greenDeep : C.orange, align: "right", valign: "middle" });
     });
     y += mh + 0.1;
     pcard(P.cx, y, P.cw, 0.84);
