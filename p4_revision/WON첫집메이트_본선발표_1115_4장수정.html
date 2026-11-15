@@ -389,16 +389,16 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.9;stroke
 
 /* ───────── S4 우리은행의 기회: 고객이 찾아오고 → 큰 돈이 움직이고 → 은행에 남는다 ─────────
    색은 왼쪽(고객 쪽 밝은 블루)에서 오른쪽(은행 쪽 남색)으로 깊어지고, 가운데 '큰 돈'만 채운 블루로 주인공을 만든다.
-   큰 숫자는 비례폭 숫자(tabular-nums 쓰지 않음). 막대는 얇게(10px), 조각 사이 2px 간격, 범례로 이름을 붙인다. */
+   큰 숫자는 비례폭 숫자(tabular-nums 쓰지 않음). 비율 막대는 얇게(10px), 빈 트랙은 같은 계열의 옅은 색. */
 .op{gap:24px;padding-top:4px}
 .op-flow{display:grid;grid-template-columns:1fr 1.14fr 1fr;gap:56px;align-items:stretch}
 .op-card{position:relative;display:flex;flex-direction:column;padding:28px 32px 24px;border-radius:24px;background:var(--soft);border:1.5px solid var(--line)}
 .op-card:not(:last-child)::after{content:"";position:absolute;right:-35px;top:50%;width:14px;height:14px;border-top:3.5px solid #9fb3c8;border-right:3.5px solid #9fb3c8;transform:translateY(-50%) rotate(45deg)}
 .op-ey{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:800;letter-spacing:-.035em;line-height:1.3}
 .op-ey i{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:18px;font-weight:800;color:#fff;flex:none}
-.op-big{margin:8px 0 2px;font-size:118px;font-weight:900;line-height:1.1;letter-spacing:-.05em;white-space:nowrap}
-.op-big small{font-size:48px;font-weight:800;margin-left:6px;letter-spacing:-.03em}
-.op-k{font-size:27px;font-weight:800;line-height:1.34;color:var(--ink);letter-spacing:-.04em}
+.op-big{margin:10px 0 4px;font-size:132px;font-weight:900;line-height:1.1;letter-spacing:-.05em;white-space:nowrap}
+.op-big small{font-size:52px;font-weight:800;margin-left:6px;letter-spacing:-.03em}
+.op-k{font-size:28px;font-weight:800;line-height:1.34;color:var(--ink);letter-spacing:-.04em}
 .op-card cite{display:block;margin-top:auto;padding-top:16px;font-style:normal;font-size:15.5px;line-height:1.5;color:#77818c}
 /* 비율 막대(미터): 채운 부분 = 카드 색, 빈 트랙 = 같은 계열의 옅은 색 */
 .op-meter{height:10px;margin-top:20px;border-radius:5px;background:var(--trk);overflow:hidden}
@@ -406,13 +406,11 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.9;stroke
 .op-cap{margin-top:12px;font-size:18px;font-weight:700;color:var(--text);line-height:1.4}
 /* 막대 연출: 숫자 카운트업과 같은 박자로 차오른다(뒤로 돌아오면·동작 줄이기·인쇄에서는 바로 완성) */
 @keyframes opGrow{from{width:0}}
-@keyframes opWipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
 .frame.on:not(.back) .op-meter i{animation:opGrow .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--d,0s) + .15s)}
-.frame.on:not(.back) .op-bar{animation:opWipe .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--d,0s) + .15s)}
-/* ① 고객 */
 /* 가운데 카드를 크게 보이게: 가운데에 음수 여백을 주지 않고 양옆 카드에 위아래 12px 여백을 준다
    (음수 여백은 PDF 인쇄 때 Chromium이 행 높이에서 빼지 않아 카드가 하단 바와 겹친다) */
 .op-card.c1,.op-card.c3{margin:12px 0}
+/* ① 고객 */
 .op-card.c1{background:var(--ai-l);border-color:var(--ai-m);--trk:#cfe2f8;--fil:var(--ai)}
 .op-card.c1 .op-ey,.op-card.c1 .op-big{color:var(--ai)}
 .op-card.c1 .op-ey i{background:var(--ai)}
@@ -422,14 +420,7 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.9;stroke
 .op-card.c2 .op-ey i{background:#fff;color:var(--blue)}
 .op-card.c2 .op-big,.op-card.c2 .op-k{color:#fff}
 .op-card.c2 cite{color:#a9cdea}
-.op-ex{position:absolute;right:26px;top:26px;font-size:15px;font-weight:800;color:#fff;background:rgba(255,255,255,.16);border-radius:999px;padding:3px 12px}
-.op-bar{display:flex;gap:2px;height:10px;margin-top:20px}
-.op-bar i{display:block;height:100%;border-radius:5px}
-.op-lg{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:12px;font-size:18px;font-weight:700;color:#fff;line-height:1.4}
-.op-lg li{display:flex;align-items:center;gap:8px}
-.op-lg li::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--c);flex:none}
-.op-lg small{font-size:15.5px;font-weight:600;color:#cfe3f5}
-.op-n{display:flex;align-items:baseline;gap:12px;margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.22);font-size:18px;font-weight:600;color:#d8eaf8}
+.op-n{display:flex;align-items:baseline;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.22);font-size:18px;font-weight:600;color:#d8eaf8}
 .op-n b{font-size:27px;font-weight:800;color:#fff;letter-spacing:-.03em}
 /* ③ 은행 */
 .op-card.c3{background:var(--sys-l);border-color:var(--sys-m);--trk:#c8d5e3;--fil:var(--sys)}
@@ -766,14 +757,11 @@ html.pres.idle,html.pres.idle *{cursor:none}
         <cite>CJ메조미디어 업종 리포트(2026.10)<br>금융상품 가입 경험자 약 1,000명</cite>
       </li>
       <li class="op-card c2 rv">
-        <span class="op-ex">예시 고객</span>
         <p class="op-ey"><i>2</i>큰 돈이 움직입니다</p>
-        <p class="op-big"><span data-cu="4">4</span>.5<small>억 원</small></p>
-        <p class="op-k">잔금일 하루에<br>오가는 돈</p>
-        <div class="op-bar" role="img" aria-label="잔금 4억 5,000만 원 = 은행 대출 2억 4,000만 원 + 고객 자금 2억 1,000만 원"><i style="flex:2.4;background:#ffffff"></i><i style="flex:2.1;background:#ffb27a"></i></div>
-        <ul class="op-lg"><li style="--c:#ffffff">은행 대출 2.4억</li><li style="--c:#ffb27a">고객 자금 2.1억 <small>보증금·예금</small></li></ul>
+        <p class="op-big"><span data-cu="2">2</span>.17<small>억 원</small></p>
+        <p class="op-k">1인당 새로 받은<br>은행 주택담보대출</p>
         <p class="op-n"><b>72.6만 호</b>한 해 전국 주택 매매 (2025년)</p>
-        <cite>예시 고객: 생애 첫 집 · 5억 원 아파트<br>거래량: 한국부동산원 자료 · KB주택시장 리뷰(2026.2)</cite>
+        <cite>한국은행 차주별 가계부채 통계(2026년 2분기)<br>매매: 한국부동산원 자료 · KB주택시장 리뷰(2026.2)</cite>
       </li>
       <li class="op-card c3 rv">
         <p class="op-ey"><i>3</i>은행에 남습니다</p>
