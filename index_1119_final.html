@@ -699,6 +699,41 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.9;stroke
 .frame.on:not(.back) .tl-m .dot{animation:x-pop .45s cubic-bezier(.3,.7,.2,1) both;animation-delay:calc(var(--d,0s) + var(--md,0s))}
 .frame.on:not(.back) .tl-m .tk,.frame.on:not(.back) .tl-m .cd{animation:rvIn .4s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--d,0s) + var(--md,0s) + .06s)}
 
+
+/* ───────── 4장 해결: 이 모든 고민, 첫집 메이트가 해결합니다 ─────────
+   3장 → 4장으로 넘어오면(앞으로 넘길 때만): 3장의 제목·질문·연결선(복제본 .sol-ghost)이 투명해지고,
+   가운데 구슬이 3장과 같은 자리·크기에서 왼쪽으로 이동한 뒤, 질문 선이 구슬로 모이고 → 화살표 → 카드 네 개가 차례로 나타난다.
+   다른 경로로 들어오면 구슬도 다른 요소처럼 올라오고, 뒤로 돌아오면·동작 줄이기·인쇄에서는 바로 완성 화면 */
+.sol{position:absolute;inset:0;pointer-events:none}
+.sol-ghost{position:absolute;inset:0;opacity:0}
+.sol-ghost .ttl{position:absolute;left:72px;top:98px;margin:0}
+.sol-ghost .mm-hub{display:none}
+.sol-ghost *{animation:none!important}
+.sol-in{position:absolute;left:0;top:0;width:1600px;height:900px;overflow:visible}
+.sol-in path{fill:none;stroke:url(#solLn);stroke-width:3;stroke-linecap:round;stroke-dasharray:1}
+.sol .mm-hub{left:298px}
+.sol-ar{position:absolute;left:640px;top:456px;width:116px;height:116px}
+.sol-grid{position:absolute;left:776px;right:72px;top:206px;height:584px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:22px}
+.sol-c{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px 22px;border-radius:26px;background:#fff;border:1.5px solid var(--line);box-shadow:0 14px 34px rgba(0,60,120,.09);text-align:center}
+.sol-c .ic{width:76px;height:76px;border-radius:22px;display:grid;place-items:center;font-size:38px;color:#fff;background:radial-gradient(circle at 34% 28%,#2b95dd 0%,#0d6db9 55%,#07519a 100%);box-shadow:0 8px 18px rgba(0,80,150,.22);margin-bottom:8px}
+.sol-c .ic svg{stroke-width:2}
+.sol-c h3{font-size:38px;font-weight:900;color:var(--ink);letter-spacing:-.045em;line-height:1.2}
+.sol-c p{font-size:22px;font-weight:600;color:var(--gray);line-height:1.4;letter-spacing:-.03em}
+@keyframes solFade{from{opacity:1}to{opacity:0}}
+@keyframes solMove{from{transform:translateX(345px)}to{transform:none}}
+@keyframes solArrow{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
+/* 3장에서 넘어올 때 */
+.frame.on:not(.back)[data-from="s3"] .sol-ghost{animation:solFade .5s ease-out both}
+.frame.on:not(.back)[data-from="s3"] .sol .mm-hub{animation:solMove .85s cubic-bezier(.45,0,.2,1) .12s both,mmGlow 1.6s ease-in-out 1.9s 1}
+.frame.on:not(.back)[data-from="s3"] .sol-tt{animation:rvIn .45s cubic-bezier(.2,.7,.2,1) .4s both}
+/* 다른 경로로 들어올 때 */
+.frame.on:not(.back):not([data-from="s3"]) .sol .mm-hub{animation:pop .6s cubic-bezier(.3,.7,.2,1) .05s both}
+.frame.on:not(.back):not([data-from="s3"]) .sol-tt{animation:rvIn .4s cubic-bezier(.2,.7,.2,1) both}
+/* 공통: 구슬이 자리 잡은 뒤 선 → 화살표 → 카드 */
+.frame.on:not(.back) .sol-in path{animation:mmDraw .55s cubic-bezier(.4,0,.2,1) both;animation-delay:var(--ld,0s)}
+.frame.on:not(.back) .sol-ar{animation:solArrow .45s cubic-bezier(.2,.7,.2,1) 1.05s both}
+.frame.on:not(.back) .sol-c{animation:rvIn .45s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--cd,1.15s)}
+
 /* ───────── 시연 장(7~11장) 머리: 이 화면이 고우리 씨 이야기의 어느 날, 몇 번째 막힘을 푸는지 ───────── */
 .scene{margin-top:14px;display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;color:var(--gray);letter-spacing:-.02em;line-height:1.4;flex:none}
 .scene .k{font-size:15px;font-weight:800;color:#c95c0c;background:var(--cus-l);border-radius:8px;padding:3px 10px;white-space:nowrap}
@@ -932,23 +967,21 @@ html.pres.idle,html.pres.idle *{cursor:none}
 </div>
 </section>
 
-<!-- ═══════════════ S4 해결: 흩어진 질문을 잔금일까지 이어지는 하나의 일정으로 ═══════════════ -->
-<section class="frame" id="s4" data-sec="2" data-who="A" data-time="45" data-name="해결 — 잔금일에서 거꾸로 짠 하나의 일정">
+<!-- ═══════════════ S4 해결: 이 모든 고민, 첫집 메이트가 해결합니다 (3장 구슬이 왼쪽으로 이동) ═══════════════ -->
+<section class="frame" id="s4" data-sec="2" data-who="A" data-time="45" data-name="해결 — 이 모든 고민, 첫집 메이트가 해결합니다">
 <div class="slide std">
   <div class="top"></div>
-  <h2 class="ttl rv">흩어진 질문을, <span class="hl">잔금일까지 이어지는 하나의 일정</span>으로 바꿉니다</h2>
-  <div class="body sv">
-    <div class="tl-wrap rv">
-      <div class="tl" role="img" aria-label="고우리 씨의 계획표, 잔금일 12월 18일에서 거꾸로 짠 일정: 10.23 D-56 디딤돌 대상·한도 확인 · 11.3 D-45 상품별 대출 서류 준비(준비 목표일) · 11.27 심사 승인 알림(승인 예상 시기 안내, 승인되면 알림) · 12.4 D-14 모자란 돈 미리 확보(부대비용 620만 원) · 12.11 D-7 보증금 반환 시간 확정 · 12.18 D-day 잔금일 진행·송금 승인 · 입주 후 자동이체 연결">
-        <i class="tl-ax" style="width:1282px"></i><i class="tl-ax2" style="left:1282px;width:168px"></i>
-        <div class="tl-m up" style="left:18px;--md:0.10s;--cx:-16px"><i class="dot"></i><i class="tk"></i><div class="cd"><span class="dt">10.23 · D-56</span><b>디딤돌 대상·한도 확인</b></div></div>
-        <div class="tl-m dn" style="left:266px;--md:0.20s"><i class="dot"></i><i class="tk"></i><div class="cd"><span class="dt">11.3 · D-45</span><b>상품별 대출 서류 준비</b></div></div>
-        <div class="tl-m up hi" style="left:808px;--md:0.40s;--cx:-284px"><i class="dot"></i><i class="tk"></i><div class="cd"><span class="dt">11.27</span><b>심사 승인 알림</b><small>승인 예상 시기 안내 · 승인되면 알림</small></div></div>
-        <div class="tl-m dn" style="left:966px;--md:0.47s;--cx:-126px"><i class="dot"></i><i class="tk"></i><div class="cd"><span class="dt">12.4 · D-14</span><b>모자란 돈 미리 확보</b><small>부대비용 620만 원</small></div></div>
-        <div class="tl-m up" style="left:1124px;--md:0.54s;--cx:-284px"><i class="dot"></i><i class="tk"></i><div class="cd"><span class="dt">12.11 · D-7</span><b>보증금 반환 시간 확정</b></div></div>
-        <div class="tl-m dn go" style="left:1282px;--md:0.61s;--cx:-126px"><i class="dot"></i><i class="tk"></i><div class="cd"><span class="dt">12.18 · D-day</span><b>잔금일 진행·송금 승인</b><small>송금 직전 등기 재확인</small></div></div>
-        <div class="tl-m up af" style="left:1400px;--md:0.80s;--cx:-244px"><i class="dot"></i><i class="tk"></i><div class="cd"><span class="dt">입주 후</span><b>자동이체 연결</b></div></div>
-      </div>
+  <div class="sol-ghost" aria-hidden="true"></div>
+  <h2 class="ttl sol-tt">이 모든 고민, <span class="hl">첫집 메이트가 해결합니다.</span></h2>
+  <div class="sol" role="img" aria-label="WON 첫집 메이트가 고객의 질문을 모아 네 가지로 해결: 맞춤 대출 설계(정책자금부터 대안 상품까지), 서류·심사 관리(제출 일정부터 승인 알림까지), 계약 위험 점검(권리관계·반환보증 확인), 잔금일 안심 실행(자금 조율·송금 전 최종 확인)">
+    <svg class="sol-in" viewBox="0 0 1600 900" aria-hidden="true"><defs><linearGradient id="solLn" x1="0" x2="316" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a9cdea" stop-opacity="0"/><stop offset=".35" stop-color="#a9cdea"/><stop offset="1" stop-color="#1f7ae0"/></linearGradient></defs><path pathLength="1" style="--ld:0.95s" d="M-20 290C150 290 200 476 316 476"/><path pathLength="1" style="--ld:0.99s" d="M-20 380C150 380 200 488 316 488"/><path pathLength="1" style="--ld:1.03s" d="M-20 458C150 458 200 500 316 500"/><path pathLength="1" style="--ld:1.07s" d="M-20 522C150 522 200 514 316 514"/><path pathLength="1" style="--ld:1.11s" d="M-20 586C150 586 200 528 316 528"/><path pathLength="1" style="--ld:1.15s" d="M-20 664C150 664 200 540 316 540"/><path pathLength="1" style="--ld:1.19s" d="M-20 756C150 756 200 552 316 552"/></svg>
+    <div class="mm-hub"><div class="mm-core"><span class="mm-logo"><img data-logo alt=""></span><b>WON</b><b>첫집 메이트</b></div></div>
+    <svg class="sol-ar" viewBox="0 0 96 96" aria-hidden="true"><defs><linearGradient id="solAr" x1="0" x2="1"><stop offset="0" stop-color="#a9cdea" stop-opacity=".25"/><stop offset="1" stop-color="#5aa2dc"/></linearGradient></defs><path d="M4 34h46V10l42 38-42 38V62H4z" fill="url(#solAr)"/></svg>
+    <div class="sol-grid">
+      <div class="sol-c" style="--cd:1.15s"><span class="ic"><svg class="i"><use href="#i-coin"/></svg></span><h3>맞춤 대출 설계</h3><p>정책자금부터 대안 상품까지</p></div>
+      <div class="sol-c" style="--cd:1.25s"><span class="ic"><svg class="i"><use href="#i-file"/></svg></span><h3>서류·심사 관리</h3><p>제출 일정부터 승인 알림까지</p></div>
+      <div class="sol-c" style="--cd:1.35s"><span class="ic"><svg class="i"><use href="#i-search"/></svg></span><h3>계약 위험 점검</h3><p>권리관계·반환보증 확인</p></div>
+      <div class="sol-c" style="--cd:1.45s"><span class="ic"><svg class="i"><use href="#i-send"/></svg></span><h3>잔금일 안심 실행</h3><p>자금 조율·송금 전 최종 확인</p></div>
     </div>
   </div>
 </div>
@@ -1413,6 +1446,9 @@ html.pres.idle,html.pres.idle *{cursor:none}
   const root=document.documentElement;
   root.classList.add('js');
   /* 3장 마인드맵 가운데 원의 로고: 머리 로고와 같은 그림을 쓴다(파일 크기를 늘리지 않게) */
+  /* 4장 유령 레이어: 3장의 제목·질문·연결선을 그대로 복제해 겹쳐 두고, 3장에서 넘어올 때 투명하게 사라지게 한다(구슬은 4장의 것이 이동) */
+  (function(){const g=document.querySelector('#s4 .sol-ghost'),s3=document.getElementById('s3');if(!g||!s3)return;
+    [s3.querySelector('.ttl'),s3.querySelector('.mm')].forEach(n=>{if(!n)return;const c=n.cloneNode(true);c.removeAttribute('role');c.removeAttribute('aria-label');c.classList.remove('rv');c.querySelectorAll('.rv').forEach(e=>e.classList.remove('rv'));g.appendChild(c)})})();
   document.querySelectorAll('img[data-logo]').forEach(i=>{i.src=LOGO});
   const frames=[...document.querySelectorAll('.frame')];
   const main=frames;  // 모든 장이 본문
@@ -1526,7 +1562,7 @@ html.pres.idle,html.pres.idle *{cursor:none}
   }
   function go(n,s,back){
     if(n<0||n>=frames.length)return;
-    if(n!==fi){const old=frames[fi];apply(old,old._max,true)}
+    if(n!==fi){const old=frames[fi];apply(old,old._max,true);frames[n].dataset.from=old.id}
     fi=n;st=Math.max(0,Math.min(s==null?0:s,maxOf(frames[fi])));
     if(fi>0)startT();  // 표지에서 T를 누르지 않았다면, 표지를 넘길 때 자동 시작(이 경우 표지 시간은 빠짐)
     render(back);
