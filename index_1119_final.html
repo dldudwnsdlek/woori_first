@@ -190,6 +190,7 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.9;stroke
 .p-recv .l b{color:#0067ac}
 .p-recv .v{font-size:26px;font-weight:800;color:#111820;letter-spacing:-.03em}
 .p-rec .why{padding:2px 18px 0;font-size:15.5px;color:#4a525d}
+.p-rec .rec-go{margin:10px 18px 0;padding:10px 0;font-size:17px}
 .p-rec .dd{margin:8px 18px 0;padding:7px 10px;border-radius:9px;font-size:14.5px;font-weight:700;color:#2b5f98;background:#eef5fd}
 /* 잔금 준비 */
 .p-total{padding:16px 18px 16px}
@@ -542,6 +543,9 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.9;stroke
 .im-base{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:21px;color:var(--text)}
 .im-base em{font-style:normal;font-size:17px;font-weight:800;color:#11603a;background:var(--ok-l);border-radius:8px;padding:4px 12px}
 .im-base .nt{margin-left:auto;font-size:19px;font-weight:700;color:var(--ai)}
+.im-bases{display:flex;flex-direction:column;gap:10px}
+.im-bases em{min-width:100px;text-align:center}
+.im-next em{color:#c95c0c;background:var(--cus-l)}
 .im-rule b{color:var(--blue-d)}
 .im-rule{padding:20px 28px;border-radius:18px;background:var(--blue-l);font-size:28px;font-weight:800;color:var(--blue);text-align:center;letter-spacing:-.035em}
 
@@ -976,7 +980,7 @@ html.pres.idle,html.pres.idle *{cursor:none}
     <svg class="sol-ar" viewBox="0 0 96 96" aria-hidden="true"><defs><linearGradient id="solAr" x1="0" x2="1"><stop offset="0" stop-color="#a9cdea" stop-opacity=".25"/><stop offset="1" stop-color="#5aa2dc"/></linearGradient></defs><path d="M4 34h46V10l42 38-42 38V62H4z" fill="url(#solAr)"/></svg>
     <div class="sol-grid">
       <div class="sol-c" style="--cd:.95s"><span class="ic"><svg class="i"><use href="#i-coin"/></svg></span><h3>맞춤 대출 설계</h3><p>정책자금부터 대안 상품까지</p></div>
-      <div class="sol-c" style="--cd:1.05s"><span class="ic"><svg class="i"><use href="#i-file"/></svg></span><h3>서류·심사 관리</h3><p>제출 일정부터 승인 알림까지</p></div>
+      <div class="sol-c" style="--cd:1.05s"><span class="ic"><svg class="i"><use href="#i-file"/></svg></span><h3>서류·심사 관리</h3><p>상품별 서류 일정·심사 알림</p></div>
       <div class="sol-c" style="--cd:1.15s"><span class="ic"><svg class="i"><use href="#i-search"/></svg></span><h3>계약 위험 점검</h3><p>권리관계·반환보증 확인</p></div>
       <div class="sol-c" style="--cd:1.25s"><span class="ic"><svg class="i"><use href="#i-send"/></svg></span><h3>잔금일 안심 실행</h3><p>자금 조율·송금 전 최종 확인</p></div>
     </div>
@@ -1030,15 +1034,15 @@ html.pres.idle,html.pres.idle *{cursor:none}
     <p class="ag-goal rv"><span class="lab">고우리 씨의 목표</span><span class="q">“12월 20일까지 잔금과 입주 준비를 마치고 싶어요.”</span></p>
     <ol class="ag-flow">
       <li class="ag-step rv"><div class="no"><i>1</i><h3>계획</h3></div><p>계약서와 자금 일정을 연결</p><span class="tgs"><span class="tg ai">AI</span></span></li>
-      <li class="ag-step s-sys rv"><div class="no"><i>2</i><h3>확인</h3></div><p>계좌·대출은 도구로,<br>서류는 법무사가 확인</p><span class="tgs"><span class="tg sys">은행 시스템</span><span class="tg tool">도구</span><span class="tg pro">전문가</span></span></li>
-      <li class="ag-step s-re rv"><div class="no"><i>3</i><h3>재계획</h3></div><p>지연되면 영향받는 일정 조정,<br>대출 실행은 담당자 판단</p><span class="tgs"><span class="tg ai">AI</span><span class="tg pro">전문가</span></span></li>
-      <li class="ag-step s-cus rv"><div class="no"><i>4</i><h3>확인·승인</h3></div><p>변경안을 확인하고 필요한 거래 승인</p><span class="tgs"><span class="tg cus">고객</span></span></li>
+      <li class="ag-step s-sys rv"><div class="no"><i>2</i><h3>확인</h3></div><p>우리은행 계좌·대출 상태,<br>서류는 법무사가 확인</p><span class="tgs"><span class="tg sys">은행 시스템</span><span class="tg tool">도구</span><span class="tg pro">전문가</span></span></li>
+      <li class="ag-step s-re rv"><div class="no"><i>3</i><h3>재계획</h3></div><p>금융정보가 달라지면<br>다음 행동을 다시 조정</p><span class="tgs"><span class="tg ai">AI</span><span class="tg pro">전문가</span></span></li>
+      <li class="ag-step s-cus rv"><div class="no"><i>4</i><h3>확인·승인</h3></div><p>변경안 확인·송금 승인,<br>실행은 은행 시스템이</p><span class="tgs"><span class="tg cus">고객</span><span class="tg sys">은행 시스템</span></span></li>
     </ol>
     <div class="ag-loop rv">
       <svg viewBox="0 0 1456 80" preserveAspectRatio="none" aria-hidden="true"><path d="M1289 0 V52 Q1289 64 1277 64 H553 Q541 64 541 52 V9"/><path d="M531 20 L541 7 L551 20" style="stroke-dasharray:none"/></svg>
       <p class="lab"><svg class="i"><use href="#i-loop"/></svg>상태가 바뀔 때마다 다시 확인하고 계획을 고칩니다</p>
     </div>
-    <p class="ag-diff rv">정해진 할 일을 보여 주는 데서 나아가, <b>내 계약·자금·진행 상태에 맞춰 다음 행동</b>을 준비합니다</p>
+    <p class="ag-diff rv">상담 챗봇과 달리, 고객 동의를 받아 <b>우리은행의 실제 계좌·대출 정보로 다음 행동</b>을 연결합니다</p>
     <p class="ag-roles rv"><span class="tg ai">AI</span><span class="tg sys">은행 시스템</span><span class="tg cus">고객</span><span class="tg pro">전문가</span></p>
   </div>
 </div>
@@ -1048,7 +1052,7 @@ html.pres.idle,html.pres.idle *{cursor:none}
 <section class="frame" id="s7" data-sec="4" data-who="A" data-time="70" data-name="화면① 계약서를 읽고 대출·일정 세우기 (막힘 ①②③)" data-demo="1">
 <div class="slide pl">
   <div class="pcol">
-    <div class="phone pu" role="img" aria-label="컨셉 화면: 계약서 읽기, 일요일 잔금일 조정 제안, 대출 세 상품 비교와 디딤돌 추천(예상 한도 2억 4,000만 원), 할 일 일정표">
+    <div class="phone pu" role="img" aria-label="컨셉 화면: 계약서 읽기, 일요일 잔금일 조정 제안, 대출 세 상품 비교와 디딤돌 추천(예상 한도 2억 4,000만 원), 우리은행 신청 연결, 할 일 일정표">
       <div class="isl"></div>
       <div class="scr">
         <div class="p-sb"><span data-tx="10:24|10:25|10:27">10:27</span><span class="ic"><svg width="20" height="13" viewBox="0 0 20 13"><rect x="0" y="9" width="3.4" height="4" rx="1" fill="#141a23"/><rect x="5.4" y="6" width="3.4" height="7" rx="1" fill="#141a23"/><rect x="10.8" y="3" width="3.4" height="10" rx="1" fill="#141a23"/><rect x="16.2" y="0" width="3.4" height="13" rx="1" fill="#141a23"/></svg><svg width="18" height="13" viewBox="0 0 18 13"><path d="M1 4.6a11.5 11.5 0 0116 0M3.8 7.6a7.4 7.4 0 0110.4 0M6.6 10.4a3.4 3.4 0 014.8 0" fill="none" stroke="#141a23" stroke-width="2" stroke-linecap="round"/></svg><svg width="28" height="13" viewBox="0 0 28 13"><rect x=".8" y=".8" width="23" height="11.4" rx="3.4" fill="none" stroke="#141a23" stroke-width="1.4" opacity=".45"/><rect x="2.6" y="2.6" width="17" height="7.8" rx="2" fill="#141a23"/><rect x="25.4" y="4.3" width="2" height="4.4" rx="1" fill="#141a23" opacity=".45"/></svg></span></div>
@@ -1096,18 +1100,18 @@ html.pres.idle,html.pres.idle *{cursor:none}
                 <p class="p-cmp"><span class="pick"><svg class="i"><use href="#i-check"/></svg>디딤돌</span><span>보금자리론</span><span>우리은행 주담대</span></p>
                 <p class="p-recv"><span class="l">추천 <b>디딤돌대출</b> · 예상 한도</span><span class="v num">2억 4,000만 원</span></p>
                 <p class="why">추천 이유: 금리가 가장 낮아 월 상환 부담 최소</p>
-                <p class="dd">방공제 반영 · 보증을 통한 한도 보완 가능성 확인</p>
+                <p class="dd">지역별 방공제 반영 · 보증 활용 가능성 확인</p>
+                <p class="p-cta rec-go"><svg class="i"><use href="#i-bank"/></svg>우리은행에서 디딤돌 신청·상담 이어가기<svg class="i"><use href="#i-chev"/></svg></p>
               </div>
               <div class="p-card">
                 <p class="hd" style="justify-content:space-between">할 일 11개 중 2개 끝났어요<span style="font-size:14px;font-weight:600;color:#8a929d">생애최초 · 매매</span></p>
                 <ul class="p-list">
                   <li class="p-li"><span class="ck"></span><span class="t">잔금일 18일 조정 요청<small>중개사 문자 초안 준비됨</small></span><span class="d"><b>오늘</b>10.23</span></li>
-                  <li class="p-li"><span class="ck"></span><span class="t">디딤돌 서류 준비<small>상품 일정·영업일로 잡은 목표일</small></span><span class="d"><b>D-45</b>11.3(화)</span></li>
+                  <li class="p-li"><span class="ck"></span><span class="t">디딤돌 서류 준비<small>디딤돌 규칙·영업일 기준 준비 목표일</small></span><span class="d"><b>D-45</b>11.3(화)</span></li>
                   <li class="p-li hot"><span class="ck hot"></span><span class="t">잔금 자금표 확정 · 이체한도 확인<small>놓치기 쉬운 일</small></span><span class="d"><b>D-14</b>12.4(금)</span></li>
                   <li class="p-li"><span class="ck"></span><span class="t">보증금 반환 시간 확인<small>현재 집주인</small></span><span class="d"><b>D-7</b>12.11(금)</span></li>
                 </ul>
               </div>
-              <p class="p-cap" style="text-align:center">+ 7개 더 보기 · 잔금일에서 거꾸로 계획했어요</p>
             </div>
           </div>
         </div>
@@ -1121,7 +1125,7 @@ html.pres.idle,html.pres.idle *{cursor:none}
     <ol class="anns">
       <li class="ann" data-hl="0"><i class="n">1</i><div><h3>계약서에서 날짜·금액을 읽고, 고객이 확인</h3><p>읽은 값은 고객이 ‘맞아요’를 눌러야 계획에 씁니다</p><div class="tgs"><span class="tg ai">AI · 문서 해석</span><span class="tg cus">고객 · 확인</span></div></div></li>
       <li class="ann" data-step="1" data-hl="1"><i class="n">2</i><div><h3>일요일 잔금일을 먼저 찾고, 조정 문자 초안</h3><p>대출 실행·등기 신청이 어려운 날을 영업일 달력으로 확인</p><div class="tgs"><span class="tg tool">도구 · 영업일 달력</span><span class="tg ai">AI · 조정 제안</span><span class="tg cus">고객 · 발송 결정</span></div></div></li>
-      <li class="ann" data-step="2" data-hl="2"><i class="n">3</i><div><h3>세 대출을 비교해, 내게 맞는 상품을 추천</h3><p>디딤돌·보금자리론·우리은행 주담대의 자격·한도·상환 부담을 비교하고, 상품 일정에 맞춰 서류 준비일을 잡습니다</p><div class="tgs"><span class="tg sys">은행 시스템 · 자격·한도 계산</span><span class="tg ai">AI · 비교·추천 설명</span></div></div></li>
+      <li class="ann" data-step="2" data-hl="2"><i class="n">3</i><div><h3>세 대출을 비교·추천하고, 우리은행 신청으로 연결</h3><p>자격·한도·상환 부담에 지역별 방공제까지 반영해 비교하고, 고른 상품 규칙에 맞춰 서류 준비일을 잡습니다</p><div class="tgs"><span class="tg sys">은행 시스템 · 한도 계산·신청 접수</span><span class="tg ai">AI · 비교·추천 설명</span></div></div></li>
     </ol>
   </div>
   <p class="src" style="left:620px">대출 비교·예상 한도는 시연용 가정(생애최초·소득·주택 요건 충족, 단독세대주 아님) · 실제 자격·한도·승인은 은행 심사로 확정</p>
@@ -1148,7 +1152,7 @@ html.pres.idle,html.pres.idle *{cursor:none}
             </div>
             <div class="p-card">
               <div class="p-src"><span class="dot" style="background:#0067ac"></span><span class="t">보증금 반환<small data-tx="현재 집주인 · 전세 만기 12월 20일|현재 집주인 · 전세 만기 12월 20일|만기 12월 20일 · 18일 반환 확인 필요" class="">만기 12월 20일 · 18일 반환 확인 필요</small></span><span class="a">2억</span></div>
-              <div class="p-src"><span class="dot" style="background:#5aa2dc"></span><span class="t">디딤돌 대출<small>11.27 심사 승인 알림 · 18일 실행</small></span><span class="a">2억 4,000만</span></div>
+              <div class="p-src"><span class="dot" style="background:#5aa2dc"></span><span class="t">디딤돌 대출<small>접수·심사 → 11.27 승인 · 18일 실행</small></span><span class="a">2억 4,000만</span></div>
               <div class="p-src"><span class="dot" style="background:#a9cdea"></span><span class="t">내 예금<small>우리은행 계좌 · 동의 조회</small></span><span class="a">1,000만</span></div>
             </div>
             <div class="p-alert or" data-step="1" data-show="0,1,2" data-hl="1">
@@ -1176,7 +1180,7 @@ html.pres.idle,html.pres.idle *{cursor:none}
     <p class="scene rv"><span class="k">막힘<b>3</b><b>4</b></span>고우리 씨 · 11월 27일 승인 알림부터 12월 7일까지</p>
     <h2 class="ttl rv">자금과 일정을 연결해,<br><span style="white-space:nowrap"><span class="hl">모자란 돈과 어긋난 날짜</span>를 미리 찾습니다</span></h2>
     <ol class="anns">
-      <li class="ann" data-hl="0"><i class="n">1</i><div><h3>승인된 대출·보증금·예금으로 필요한 돈 계산</h3><p>디딤돌 승인은 앱 알림으로 받고, <b>대출 한도가 달라져도 부족액과 대안을 다시 계산</b></p><div class="tgs"><span class="tg tool">도구 · 계좌·대출 조회(동의)</span><span class="tg sys">은행 시스템 · 비용 계산</span></div></div></li>
+      <li class="ann" data-hl="0"><i class="n">1</i><div><h3>은행 심사 결과를 받아 필요한 돈 계산</h3><p>접수·심사·보완 요청·승인을 앱으로 안내 · 한도가 적게 나오면 <b>원인 확인 → 대안 검토 → 자금 재계산</b></p><div class="tgs"><span class="tg tool">도구 · 계좌·대출 조회(동의)</span><span class="tg sys">은행 시스템 · 심사 상태·비용 계산</span></div></div></li>
       <li class="ann" data-step="1" data-hl="1,3"><i class="n">2</i><div><h3>부대비용 620만 원, 2주 전에 찾아 미리 확보</h3><p>별도 적금의 해지 손익 확인 → 고객 선택 → 입금 확인</p><div class="tgs"><span class="tg sys">은행 시스템 · 계산</span><span class="tg ai">AI · 선택지 정리</span><span class="tg cus">고객 · 선택</span></div></div></li>
       <li class="ann" data-step="2" data-hl="2"><i class="n">3</i><div><h3>잔금일을 당기며 생긴 보증금 날짜 충돌</h3><p>매매계약서와 전세계약서를 함께 봐야 보이는 문제 → 집주인 연락 초안</p><div class="tgs"><span class="tg ai">AI · 문서 연결</span><span class="tg cus">고객 · 발송 결정</span></div></div></li>
     </ol>
@@ -1362,15 +1366,15 @@ html.pres.idle,html.pres.idle *{cursor:none}
 <section class="frame" id="s12" data-sec="4" data-who="B" data-time="30" data-name="구현 — 계획에서 실행 연계까지 3단계">
 <div class="slide std">
   <div class="top"></div>
-  <h2 class="ttl rv">계획부터 시작해, <span class="hl">진행 확인과 거래 연계</span>로 확장합니다</h2>
+  <h2 class="ttl rv">계획부터 시작해, <span class="hl">대출 신청과 잔금 이체</span>까지 연결합니다</h2>
   <div class="body im">
     <div class="im-steps">
-      <div class="im-step p1 rv"><p class="ph">1단계</p><h3>일정·자금 계획</h3><p>계약서 정리<br>일정·자금 계획</p><span class="k nw">계좌 조회, 송금 없이 시작</span></div>
-      <div class="im-step rv"><p class="ph">2단계</p><h3>입금, 대출 확인</h3><p>입금·대출 상태 확인<br>예외 재계획</p><span class="k ln">고객 동의 후 조회 기능 연결</span></div>
-      <div class="im-step rv"><p class="ph">3단계</p><h3>잔금 이체 연결</h3><p>조건 확인<br>고객 승인 요청</p><span class="k ln">내부 검토와 시범 운영 후 확대</span></div>
+      <div class="im-step p1 rv"><p class="ph">1단계</p><h3>일정·자금 계획</h3><p>계약서 분석<br>대출 비교·자금 계획</p><span class="k nw">계좌 조회, 송금 없이 시작</span></div>
+      <div class="im-step rv"><p class="ph">2단계</p><h3>대출 진행 연결</h3><p>대출 신청·서류<br>심사 상태 연결</p><span class="k ln">고객 동의 후 조회 기능 연결</span></div>
+      <div class="im-step rv"><p class="ph">3단계</p><h3>잔금 이체 연결</h3><p>계좌 입금·대출 실행<br>고객 승인 이체</p><span class="k ln">내부 검토와 시범 운영 후 확대</span></div>
     </div>
     <p class="im-rule rv">따로 있던 우리은행의 주거 진단과 금융 기능을, <b>잔금일까지 이어지는 하나의 경험</b>으로 연결합니다</p>
-    <p class="im-base rv"><em>기존 서비스</em>전세지킴이·매매 진단(제휴) · ‘나만의 알림’ 이체 · 예약이체<span class="nt">에이전트 연동은 단계별 검증 후 확대</span></p>
+    <div class="im-bases"><p class="im-base rv"><em>기존 서비스</em>전세지킴이·매매 진단(제휴) · ‘나만의 알림’ 이체 · 예약이체</p><p class="im-base im-next rv"><em>다음 확장</em>전월세 반환보증 가입 안내 · 세입자 있는 집의 보증금 승계 관리</p></div>
   </div>
 </div>
 </section>
