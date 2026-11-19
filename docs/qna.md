@@ -1,6 +1,6 @@
 # 예상 질문과 답변
 
-본선 질의응답을 준비하며 정리한 질문과 답변입니다. 기준은 본선에 제출한 [발표자료 13장](../presentation/index.html)입니다.
+본선 질의응답을 준비하며 정리한 질문과 답변입니다. 기준은 본선에 제출한 발표자료 13장입니다([웹 슬라이드](https://dldudwnsdlek.github.io/woori_first/presentation/) · [PDF](../presentation/won-first-home-mate_final.pdf)).
 
 > 발표 화면은 클릭으로 흐름을 보여 주는 **컨셉 프로토타입**이고, 금액과 일정은 **예시**입니다.
 > 모든 답변은 같은 역할 구분을 따릅니다. **AI는 제안·초안, 은행 시스템이 확인·실행, 고객이 승인, 전문가가 판단.**
