@@ -15,11 +15,9 @@
 </p>
 
 <p align="center">
-  <a href="https://dldudwnsdlek.github.io/woori_first/presentation/"><b>▶ 발표자료 보기</b></a>
+  <a href="https://thunderous-sorbet-e0c8ed.netlify.app/"><b>▶ 발표자료 보기</b></a>
   &nbsp;·&nbsp;
   <a href="presentation/won-first-home-mate_final.pdf"><b>📄 PDF</b></a>
-  &nbsp;·&nbsp;
-  <a href="docs/qna.md"><b>💬 예상 질문과 답변</b></a>
 </p>
 
 <br>
@@ -186,9 +184,8 @@ flowchart LR
 
 13장 · 약 10분 · 2인 발표. 한 고객의 한마디 "저 12월 20일에 이사 가요"를 표지부터 마지막 장까지 따라가고, 정상 흐름과 예외 흐름(보증금 지연)을 함께 시연했습니다.
 
-- **[발표자료 보기](https://dldudwnsdlek.github.io/woori_first/presentation/)** — 웹 슬라이드, `←` `→` 키로 넘기고 `F`로 전체 화면
+- **[발표자료 보기](https://thunderous-sorbet-e0c8ed.netlify.app/)** — 웹 슬라이드, `←` `→` 키로 넘기고 `F`로 전체 화면
 - **[PDF 인쇄본](presentation/won-first-home-mate_final.pdf)** — 13쪽
-- **[예상 질문과 답변](docs/qna.md)** — 사업성 · 차별화 · 구현 · AI 기술 · 규제 질문 25개와 사실 검증표
 
 <details>
 <summary><b>슬라이드 13장 펼쳐 보기</b></summary>
@@ -232,8 +229,6 @@ flowchart LR
 │   ├── index.html                        # 본선 발표자료 (웹 슬라이드 13장)
 │   ├── won-first-home-mate_final.pdf     # 인쇄본 PDF
 │   └── appendix/                         # 백업 슬라이드
-├── docs/
-│   └── qna.md                            # 예상 질문과 답변 · 사실 검증
 └── assets/                               # README 이미지 (배너 · 앱 화면 · 슬라이드)
 ```
 
